@@ -1,0 +1,39 @@
+services:
+  mariadb:
+    image: mariadb:10.6
+    container_name: erp-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  redis-cache:
+    image: redis:7-alpine
+    container_name: erp-redis-cache
+    restart: unless-stopped
+    ports:
+      - "13000:6379"
+
+  redis-queue:
+    image: redis:7-alpine
+    container_name: erp-redis-queue
+    restart: unless-stopped
+    ports:
+      - "11000:6379"
+
+  redis-socketio:
+    image: redis:7-alpine
+    container_name: erp-redis-socketio
+    restart: unless-stopped
+    ports:
+      - "12000:6379"
+
+volumes:
+  mariadb_data:

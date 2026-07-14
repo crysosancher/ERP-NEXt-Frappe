@@ -1,0 +1,67 @@
+2026-07-15 01:32:06,345 DEBUG cd frappe-bench && uv venv env --seed --python /opt/homebrew/bin/python3.11
+2026-07-15 01:32:07,960 LOG Getting frappe
+2026-07-15 01:32:07,961 DEBUG cd frappe-bench/apps && git clone https://github.com/frappe/frappe.git --branch version-15 --depth 1 --origin upstream
+2026-07-15 01:32:20,546 LOG Installing frappe
+2026-07-15 01:32:20,547 DEBUG cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && uv pip install --quiet -e /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/apps/frappe  --python /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/python
+2026-07-15 01:32:50,836 DEBUG cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/apps/frappe && yarn install --check-files
+2026-07-15 01:32:58,154 DEBUG cd frappe-bench && bench build
+2026-07-15 01:32:58,330 INFO /Users/crysosancher/.local/bin/bench build
+2026-07-15 01:33:11,864 LOG setting up backups
+2026-07-15 01:33:12,796 WARNING /Users/crysosancher/Library/Python/3.11/bin/bench init frappe-bench --frappe-branch version-15 --python /opt/homebrew/bin/python3.11 executed with exit code 1
+2026-07-15 01:33:14,038 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-15 01:33:14,331 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-15 01:33:14,593 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-15 01:33:14,853 INFO /Users/crysosancher/.local/bin/bench get-app --branch version-15 erpnext
+2026-07-15 01:33:15,467 LOG Getting erpnext
+2026-07-15 01:33:15,467 DEBUG cd ./apps && git clone https://github.com/frappe/erpnext.git --branch version-15 --depth 1 --origin upstream
+2026-07-15 01:33:23,070 LOG Installing erpnext
+2026-07-15 01:33:23,070 DEBUG cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && uv pip install --quiet --upgrade -e /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/apps/erpnext  --python /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/python
+2026-07-15 01:33:29,746 DEBUG cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/apps/erpnext && yarn install --check-files
+2026-07-15 01:33:30,032 DEBUG bench build --app erpnext
+2026-07-15 01:33:30,154 INFO /Users/crysosancher/.local/bin/bench build --app erpnext
+2026-07-15 01:33:34,495 INFO A newer version of bench is available: 5.29.1 → 5.31.0
+2026-07-15 01:33:34,595 INFO /Users/crysosancher/.local/bin/bench --site erp.local install-app erpnext
+2026-07-15 01:33:54,023 INFO /Users/crysosancher/.local/bin/bench new-site erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-15 01:35:08,610 INFO /Users/crysosancher/.local/bin/bench new-site erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-15 01:35:14,341 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-15 01:35:14,724 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-15 01:35:15,057 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-15 01:35:15,396 INFO /Users/crysosancher/.local/bin/bench --site erp.local install-app erpnext
+2026-07-15 01:35:38,162 INFO /Users/crysosancher/.local/bin/bench drop-site erp.local --db-root-username root --db-root-password root --force
+2026-07-15 01:35:49,238 INFO /Users/crysosancher/.local/bin/bench new-site erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-15 01:36:09,249 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-15 01:36:09,714 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-15 01:36:10,055 INFO /Users/crysosancher/.local/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-15 01:36:10,395 INFO /Users/crysosancher/.local/bin/bench --site erp.local install-app erpnext
+2026-07-15 01:36:38,481 INFO /Users/crysosancher/.local/bin/bench --site erp.local set-config developer_mode 1
+2026-07-15 01:36:38,898 INFO /Users/crysosancher/.local/bin/bench --site erp.local clear-cache
+2026-07-15 01:36:39,519 INFO /Users/crysosancher/.local/bin/bench --site erp.local list-apps
+2026-07-15 01:37:19,367 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-15 01:37:19,625 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-15 01:37:19,628 INFO /Users/crysosancher/.local/bin/bench worker
+2026-07-15 01:37:19,629 INFO /Users/crysosancher/.local/bin/bench socketio
+2026-07-15 01:37:19,634 INFO /Users/crysosancher/.local/bin/bench schedule
+2026-07-15 01:37:19,636 INFO /Users/crysosancher/.local/bin/bench watch
+2026-07-15 01:37:57,163 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-15 01:37:57,461 INFO /Users/crysosancher/.local/bin/bench worker
+2026-07-15 01:37:57,462 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-15 01:37:57,464 INFO /Users/crysosancher/.local/bin/bench watch
+2026-07-15 01:37:57,474 INFO /Users/crysosancher/.local/bin/bench schedule
+2026-07-15 01:39:38,772 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-15 01:40:16,476 INFO /Users/crysosancher/.local/bin/bench --site erp.local doctor
+2026-07-15 01:41:02,530 INFO /Users/crysosancher/.local/bin/bench use erp.local
+2026-07-15 01:41:13,625 INFO /Users/crysosancher/.local/bin/bench --help
+2026-07-15 01:41:14,064 INFO /Users/crysosancher/.local/bin/bench --site erp.local --help
+2026-07-15 01:41:26,062 INFO /Users/crysosancher/.local/bin/bench --site erp.local add-to-hosts
+2026-07-15 01:43:08,993 INFO /Users/crysosancher/.local/bin/bench set-config -g dns_multitenant false
+2026-07-15 01:43:31,720 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-15 01:44:12,423 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-15 01:44:12,638 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-15 01:44:12,645 INFO /Users/crysosancher/.local/bin/bench worker
+2026-07-15 01:44:12,646 INFO /Users/crysosancher/.local/bin/bench watch
+2026-07-15 01:44:12,670 INFO /Users/crysosancher/.local/bin/bench schedule
+2026-07-15 01:45:42,033 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-15 01:45:42,383 INFO /Users/crysosancher/.local/bin/bench watch
+2026-07-15 01:45:42,386 INFO /Users/crysosancher/.local/bin/bench worker
+2026-07-15 01:45:42,390 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-15 01:45:42,397 INFO /Users/crysosancher/.local/bin/bench schedule
