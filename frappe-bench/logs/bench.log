@@ -111,3 +111,11 @@
 2026-07-20 01:54:11,556 INFO /Users/crysosancher/.local/bin/bench --site crysomedia.erp.local install-app erpnext
 2026-07-20 01:54:49,501 INFO /Users/crysosancher/.local/bin/bench --site crysomedia.erp.local set-config host_name https://crysomedia.erp.local
 2026-07-20 02:08:49,629 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-20 02:16:03,293 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-20 02:22:16,838 INFO /Users/crysosancher/.local/bin/bench new-site thoughtbins.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password 123456
+2026-07-20 02:22:32,583 INFO /Users/crysosancher/.local/bin/bench --site thoughtbins.erp.local install-app erpnext
+2026-07-20 02:23:07,467 INFO /Users/crysosancher/.local/bin/bench --site thoughtbins.erp.local set-config host_name https://thoughtbins.erp.local
+2026-07-20 02:26:56,238 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-20 02:28:05,916 INFO /Users/crysosancher/.local/bin/bench new-site qwerty.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password 12345678
+2026-07-20 02:28:21,263 INFO /Users/crysosancher/.local/bin/bench --site qwerty.erp.local install-app erpnext
+2026-07-20 02:28:57,249 INFO /Users/crysosancher/.local/bin/bench --site qwerty.erp.local set-config host_name https://qwerty.erp.local

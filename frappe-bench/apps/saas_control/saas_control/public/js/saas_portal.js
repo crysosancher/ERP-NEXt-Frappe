@@ -10,6 +10,22 @@
 		notice.classList.toggle("error", !!isError);
 	}
 
+	function setFormBusy(isBusy) {
+		var fields = ["email", "full_name", "company_slug", "password"];
+		fields.forEach(function (id) {
+			var el = byId(id);
+			if (el) el.disabled = !!isBusy;
+		});
+
+		var continueBtn = byId("continue-btn");
+		continueBtn.disabled = !!isBusy;
+
+		var createBtn = byId("create-btn");
+		createBtn.disabled = !!isBusy;
+		createBtn.classList.toggle("loading", !!isBusy);
+		createBtn.textContent = isBusy ? "Creating Tenant..." : "Create Tenant";
+	}
+
 	function toggleSignup(show) {
 		byId("signup-fields").classList.toggle("hidden", !show);
 		byId("create-btn").classList.toggle("hidden", !show);
@@ -78,7 +94,8 @@
 			return;
 		}
 
-		byId("create-btn").disabled = true;
+		setFormBusy(true);
+		setNotice("Creating tenant. This may take up to a couple of minutes...", false);
 		try {
 			var result = await callApi("saas_control.saas_control.api.create_or_login", {
 				email: email,
@@ -97,7 +114,7 @@
 		} catch (error) {
 			setNotice("Tenant creation failed. Try a different company slug.", true);
 		} finally {
-			byId("create-btn").disabled = false;
+			setFormBusy(false);
 		}
 	}
 

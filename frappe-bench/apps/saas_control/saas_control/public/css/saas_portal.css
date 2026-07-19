@@ -95,6 +95,11 @@ body {
 	font-weight: 600;
 }
 
+.btn:disabled {
+	opacity: 0.75;
+	cursor: not-allowed;
+}
+
 .btn-primary {
 	background: var(--brand);
 	color: #fff;
@@ -104,6 +109,25 @@ body {
 	background: #fff;
 	border-color: var(--border);
 	color: var(--text-1);
+}
+
+.btn.loading {
+	position: relative;
+	padding-left: 38px;
+}
+
+.btn.loading::before {
+	content: "";
+	position: absolute;
+	left: 14px;
+	top: 50%;
+	width: 14px;
+	height: 14px;
+	margin-top: -7px;
+	border-radius: 50%;
+	border: 2px solid rgba(21, 34, 56, 0.25);
+	border-top-color: var(--text-1);
+	animation: saas-spin 0.8s linear infinite;
 }
 
 .notice {
@@ -123,4 +147,10 @@ body {
 
 .hidden {
 	display: none;
+}
+
+@keyframes saas-spin {
+	to {
+		transform: rotate(360deg);
+	}
 }

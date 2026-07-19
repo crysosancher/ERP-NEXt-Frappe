@@ -1,716 +1,4 @@
-2026-07-20 01:54:36,918 WARNING database DDL Query made to DB:
-create table `tabMaterial Request Item` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`item_code` varchar(140),
-`item_name` varchar(140),
-`schedule_date` date,
-`description` longtext,
-`item_group` varchar(140),
-`brand` varchar(140),
-`image` text,
-`qty` decimal(21,9) not null default 0,
-`stock_uom` varchar(140),
-`from_warehouse` varchar(140),
-`warehouse` varchar(140),
-`uom` varchar(140),
-`conversion_factor` decimal(21,9) not null default 0,
-`stock_qty` decimal(21,9) not null default 0,
-`min_order_qty` decimal(21,9) not null default 0,
-`projected_qty` decimal(21,9) not null default 0,
-`actual_qty` decimal(21,9) not null default 0,
-`ordered_qty` decimal(21,9) not null default 0,
-`received_qty` decimal(21,9) not null default 0,
-`rate` decimal(21,9) not null default 0,
-`price_list_rate` decimal(21,9) not null default 0,
-`amount` decimal(21,9) not null default 0,
-`expense_account` varchar(140),
-`wip_composite_asset` varchar(140),
-`manufacturer` varchar(140),
-`manufacturer_part_no` varchar(140),
-`bom_no` varchar(140),
-`project` varchar(140),
-`cost_center` varchar(140),
-`lead_time_date` date,
-`sales_order` varchar(140),
-`sales_order_item` varchar(140),
-`production_plan` varchar(140),
-`material_request_plan_item` varchar(140),
-`job_card_item` varchar(140),
-`page_break` int(1) not null default 0,
-index `item_code`(`item_code`),
-index `item_name`(`item_name`),
-index `item_group`(`item_group`),
-index `sales_order_item`(`sales_order_item`),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:36,936 WARNING database DDL Query made to DB:
-ALTER TABLE `tabMaterial Request Item`
-				ADD INDEX IF NOT EXISTS `item_code_warehouse_index`(item_code, warehouse)
-2026-07-20 01:54:36,987 WARNING database DDL Query made to DB:
-create table `tabStock Ledger Entry` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`item_code` varchar(140),
-`warehouse` varchar(140),
-`posting_date` date,
-`posting_time` time(6),
-`posting_datetime` datetime(6),
-`is_adjustment_entry` int(1) not null default 0,
-`auto_created_serial_and_batch_bundle` int(1) not null default 0,
-`voucher_type` varchar(140),
-`voucher_no` varchar(140),
-`voucher_detail_no` varchar(140),
-`serial_and_batch_bundle` varchar(140),
-`dependant_sle_voucher_detail_no` varchar(140),
-`recalculate_rate` int(1) not null default 0,
-`actual_qty` decimal(21,9) not null default 0,
-`qty_after_transaction` decimal(21,9) not null default 0,
-`incoming_rate` decimal(21,9) not null default 0,
-`outgoing_rate` decimal(21,9) not null default 0,
-`valuation_rate` decimal(21,9) not null default 0,
-`stock_value` decimal(21,9) not null default 0,
-`stock_value_difference` decimal(21,9) not null default 0,
-`stock_queue` longtext,
-`company` varchar(140),
-`stock_uom` varchar(140),
-`project` varchar(140),
-`fiscal_year` varchar(140),
-`has_batch_no` int(1) not null default 0,
-`has_serial_no` int(1) not null default 0,
-`is_cancelled` int(1) not null default 0,
-`to_rename` int(1) not null default 1,
-`serial_no` longtext,
-`batch_no` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index `posting_datetime`(`posting_datetime`),
-index `voucher_type`(`voucher_type`),
-index `voucher_detail_no`(`voucher_detail_no`),
-index `serial_and_batch_bundle`(`serial_and_batch_bundle`),
-index `to_rename`(`to_rename`),
-index `batch_no`(`batch_no`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,015 WARNING database DDL Query made to DB:
-ALTER TABLE `tabStock Ledger Entry`
-				ADD INDEX IF NOT EXISTS `voucher_no_voucher_type_index`(voucher_no, voucher_type)
-2026-07-20 01:54:37,018 WARNING database DDL Query made to DB:
-ALTER TABLE `tabStock Ledger Entry`
-				ADD INDEX IF NOT EXISTS `batch_no_item_code_warehouse_index`(batch_no, item_code, warehouse)
-2026-07-20 01:54:37,020 WARNING database DDL Query made to DB:
-ALTER TABLE `tabStock Ledger Entry`
-				ADD INDEX IF NOT EXISTS `item_code_warehouse_posting_datetime_creation_index`(item_code, warehouse, posting_datetime, creation)
-2026-07-20 01:54:37,072 WARNING database DDL Query made to DB:
-create table `tabSerial and Batch Bundle` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`naming_series` varchar(140) default 'SABB-.########',
-`company` varchar(140),
-`item_name` varchar(140),
-`has_serial_no` int(1) not null default 0,
-`has_batch_no` int(1) not null default 0,
-`item_code` varchar(140),
-`warehouse` varchar(140),
-`type_of_transaction` varchar(140),
-`total_qty` decimal(21,9) not null default 0,
-`item_group` varchar(140),
-`avg_rate` decimal(21,9) not null default 0,
-`total_amount` decimal(21,9) not null default 0,
-`voucher_type` varchar(140),
-`voucher_no` varchar(140),
-`voucher_detail_no` varchar(140),
-`posting_datetime` datetime(6),
-`returned_against` varchar(140),
-`is_cancelled` int(1) not null default 0,
-`is_rejected` int(1) not null default 0,
-`amended_from` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index `voucher_type`(`voucher_type`),
-index `voucher_detail_no`(`voucher_detail_no`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,112 WARNING database DDL Query made to DB:
-ALTER TABLE `tabSerial and Batch Bundle`
-				ADD INDEX IF NOT EXISTS `item_code_warehouse_posting_datetime_creation_index`(item_code, warehouse, posting_datetime, creation)
-2026-07-20 01:54:37,141 WARNING database DDL Query made to DB:
-create table `tabQuality Inspection Template` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`quality_inspection_template_name` varchar(140) unique,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,633 WARNING database DDL Query made to DB:
-create table `tabPause SLA On Status` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`status` varchar(140),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,680 WARNING database DDL Query made to DB:
-create table `tabService Day` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`workday` varchar(140),
-`start_time` time(6),
-`end_time` time(6),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,735 WARNING database DDL Query made to DB:
-create table `tabIssue Type` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`description` text,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,829 WARNING database DDL Query made to DB:
-create table `tabIssue Priority` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`description` text,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:37,962 WARNING database DDL Query made to DB:
-create table `tabWarranty Claim` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`naming_series` varchar(140),
-`status` varchar(140) default 'Open',
-`complaint_date` date,
-`customer` varchar(140),
-`serial_no` varchar(140),
-`complaint` longtext,
-`item_code` varchar(140),
-`item_name` varchar(140),
-`description` text,
-`warranty_amc_status` varchar(140),
-`warranty_expiry_date` date,
-`amc_expiry_date` date,
-`resolution_date` datetime(6),
-`resolved_by` varchar(140),
-`resolution_details` text,
-`customer_name` varchar(140),
-`contact_person` varchar(140),
-`contact_display` text,
-`contact_mobile` varchar(140),
-`contact_email` varchar(140),
-`territory` varchar(140),
-`customer_group` varchar(140),
-`customer_address` varchar(140),
-`address_display` text,
-`service_address` text,
-`company` varchar(140),
-`complaint_raised_by` varchar(140),
-`from_company` varchar(140),
-`amended_from` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index `status`(`status`),
-index `complaint_date`(`complaint_date`),
-index `customer`(`customer`),
-index `serial_no`(`serial_no`),
-index `item_code`(`item_code`),
-index `warranty_amc_status`(`warranty_amc_status`),
-index `resolution_date`(`resolution_date`),
-index `resolved_by`(`resolved_by`),
-index `territory`(`territory`),
-index `company`(`company`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,033 WARNING database DDL Query made to DB:
-create table `tabIssue` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`naming_series` varchar(140),
-`subject` varchar(140),
-`customer` varchar(140),
-`raised_by` varchar(140),
-`status` varchar(140) default 'Open',
-`priority` varchar(140),
-`issue_type` varchar(140),
-`issue_split_from` varchar(140),
-`description` longtext,
-`service_level_agreement` varchar(140),
-`response_by` datetime(6),
-`agreement_status` varchar(140) default 'First Response Due',
-`sla_resolution_by` datetime(6),
-`service_level_agreement_creation` datetime(6),
-`on_hold_since` datetime(6),
-`total_hold_time` decimal(21,9),
-`first_response_time` decimal(21,9),
-`first_responded_on` datetime(6),
-`avg_response_time` decimal(21,9),
-`resolution_details` longtext,
-`opening_date` date,
-`opening_time` time(6),
-`sla_resolution_date` datetime(6),
-`resolution_time` decimal(21,9),
-`user_resolution_time` decimal(21,9),
-`lead` varchar(140),
-`contact` varchar(140),
-`email_account` varchar(140),
-`customer_name` varchar(140),
-`project` varchar(140),
-`company` varchar(140),
-`via_customer_portal` int(1) not null default 0,
-`attachment` text,
-`content_type` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-`_seen` text,
-index `customer`(`customer`),
-index `status`(`status`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,093 WARNING database DDL Query made to DB:
-create table `tabService Level Agreement` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`document_type` varchar(140),
-`default_priority` varchar(140),
-`service_level` varchar(140),
-`enabled` int(1) not null default 1,
-`default_service_level_agreement` int(1) not null default 0,
-`entity_type` varchar(140),
-`entity` varchar(140),
-`condition` longtext,
-`start_date` date,
-`end_date` date,
-`apply_sla_for_resolution` int(1) not null default 1,
-`holiday_list` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,168 WARNING database DDL Query made to DB:
-create table `tabSLA Fulfilled On Status` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`status` varchar(140),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,280 WARNING database DDL Query made to DB:
-create table `tabSupport Search Source` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`source_name` varchar(140),
-`source_type` varchar(140),
-`base_url` varchar(140),
-`query_route` varchar(140),
-`search_term_param_name` varchar(140),
-`response_result_key_path` varchar(140),
-`post_route` varchar(140),
-`post_route_key_list` varchar(140),
-`post_title_key` varchar(140),
-`post_description_key` varchar(140),
-`source_doctype` varchar(140),
-`result_title_field` varchar(140),
-`result_preview_field` varchar(140),
-`result_route_field` varchar(140),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,371 WARNING database DDL Query made to DB:
-create table `tabService Level Priority` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`default_priority` int(1) not null default 0,
-`priority` varchar(140),
-`response_time` decimal(21,9),
-`resolution_time` decimal(21,9),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,489 WARNING database DDL Query made to DB:
-create table `tabVideo` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`title` varchar(140) unique,
-`provider` varchar(140),
-`url` varchar(140),
-`youtube_video_id` varchar(140),
-`publish_date` date,
-`duration` decimal(21,9),
-`like_count` decimal(21,9) not null default 0,
-`view_count` decimal(21,9) not null default 0,
-`dislike_count` decimal(21,9) not null default 0,
-`comment_count` decimal(21,9) not null default 0,
-`description` longtext,
-`image` text,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,610 WARNING database DDL Query made to DB:
-create table `tabPortal User` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`user` varchar(140),
-index `user`(`user`),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:38,664 WARNING database DDL Query made to DB:
-create table `tabSMS Log` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`sender_name` varchar(140),
-`sent_on` date,
-`message` text,
-`no_of_requested_sms` int(11) not null default 0,
-`requested_numbers` longtext,
-`no_of_sent_sms` int(11) not null default 0,
-`sent_to` longtext,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,300 WARNING database DDL Query made to DB:
-create table `tabAsset Shift Allocation` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`asset` varchar(140),
-`naming_series` varchar(140),
-`finance_book` varchar(140),
-`amended_from` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index `amended_from`(`amended_from`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,387 WARNING database DDL Query made to DB:
-create table `tabAsset Capitalization Stock Item` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`item_code` varchar(140),
-`item_name` varchar(140),
-`warehouse` varchar(140),
-`purchase_receipt_item` varchar(140),
-`stock_qty` decimal(21,9) not null default 0,
-`actual_qty` decimal(21,9) not null default 0,
-`valuation_rate` decimal(21,9) not null default 0,
-`amount` decimal(21,9) not null default 0,
-`stock_uom` varchar(140),
-`serial_and_batch_bundle` varchar(140),
-`use_serial_batch_fields` int(1) not null default 0,
-`serial_no` text,
-`batch_no` varchar(140),
-`cost_center` varchar(140),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,447 WARNING database DDL Query made to DB:
-create table `tabAsset Depreciation Schedule` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`asset` varchar(140),
-`naming_series` varchar(140),
-`company` varchar(140),
-`gross_purchase_amount` decimal(21,9) not null default 0,
-`opening_accumulated_depreciation` decimal(21,9) not null default 0,
-`opening_number_of_booked_depreciations` int(11) not null default 0,
-`finance_book` varchar(140),
-`finance_book_id` int(11) not null default 0,
-`depreciation_method` varchar(140),
-`total_number_of_depreciations` int(11) not null default 0,
-`rate_of_depreciation` decimal(21,9) not null default 0,
-`daily_prorata_based` int(1) not null default 0,
-`shift_based` int(1) not null default 0,
-`frequency_of_depreciation` int(11) not null default 0,
-`expected_value_after_useful_life` decimal(21,9) not null default 0,
-`notes` text,
-`status` varchar(140),
-`amended_from` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,506 WARNING database DDL Query made to DB:
-create table `tabAsset Maintenance` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`asset_name` varchar(140) unique,
-`asset_category` varchar(140),
-`company` varchar(140),
-`item_code` varchar(140),
-`item_name` varchar(140),
-`maintenance_team` varchar(140),
-`maintenance_manager` varchar(140),
-`maintenance_manager_name` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,585 WARNING database DDL Query made to DB:
-create table `tabAsset Capitalization` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`title` varchar(140),
-`naming_series` varchar(140),
-`capitalization_method` varchar(140),
-`target_item_code` varchar(140),
-`target_item_name` varchar(140),
-`target_asset` varchar(140),
-`target_asset_name` varchar(140),
-`target_qty` decimal(21,9) not null default 1.0,
-`target_asset_location` varchar(140),
-`company` varchar(140),
-`posting_date` date,
-`posting_time` time(6),
-`set_posting_time` int(1) not null default 0,
-`finance_book` varchar(140),
-`target_batch_no` varchar(140),
-`target_serial_no` text,
-`amended_from` varchar(140),
-`target_is_fixed_asset` int(1) not null default 0,
-`target_has_batch_no` int(1) not null default 0,
-`target_has_serial_no` int(1) not null default 0,
-`stock_items_total` decimal(21,9) not null default 0,
-`asset_items_total` decimal(21,9) not null default 0,
-`service_items_total` decimal(21,9) not null default 0,
-`total_value` decimal(21,9) not null default 0,
-`target_incoming_rate` decimal(21,9) not null default 0,
-`cost_center` varchar(140),
-`project` varchar(140),
-`target_fixed_asset_account` varchar(140),
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-`_seen` text,
-index `posting_date`(`posting_date`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,662 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,708 WARNING database DDL Query made to DB:
 create table `tabMaintenance Team Member` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -730,7 +18,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,721 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,750 WARNING database DDL Query made to DB:
 create table `tabAsset Finance Book` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -759,7 +47,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,779 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,792 WARNING database DDL Query made to DB:
 create table `tabAsset Activity` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -781,7 +69,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,880 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,874 WARNING database DDL Query made to DB:
 create table `tabAsset` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -851,7 +139,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,951 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,931 WARNING database DDL Query made to DB:
 create table `tabLocation` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -882,10 +170,10 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:39,997 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,966 WARNING database DDL Query made to DB:
 ALTER TABLE `tabLocation`
 				ADD INDEX IF NOT EXISTS `lft_rgt_index`(lft, rgt)
-2026-07-20 01:54:40,054 WARNING database DDL Query made to DB:
+2026-07-20 02:22:58,995 WARNING database DDL Query made to DB:
 create table `tabAsset Capitalization Service Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -910,7 +198,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,115 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,043 WARNING database DDL Query made to DB:
 create table `tabAsset Category` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -931,7 +219,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,170 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,097 WARNING database DDL Query made to DB:
 create table `tabAsset Maintenance Team` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -953,7 +241,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,238 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,152 WARNING database DDL Query made to DB:
 create table `tabAsset Repair` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -991,7 +279,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,294 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,203 WARNING database DDL Query made to DB:
 create table `tabAsset Value Adjustment` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1021,7 +309,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,406 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,255 WARNING database DDL Query made to DB:
 create table `tabAsset Maintenance Task` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1051,7 +339,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,465 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,301 WARNING database DDL Query made to DB:
 create table `tabAsset Category Account` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1073,7 +361,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,512 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,340 WARNING database DDL Query made to DB:
 create table `tabLinked Location` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1091,7 +379,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,564 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,385 WARNING database DDL Query made to DB:
 create table `tabAsset Shift Factor` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1112,7 +400,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,641 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,438 WARNING database DDL Query made to DB:
 create table `tabAsset Maintenance Log` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1150,7 +438,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,700 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,481 WARNING database DDL Query made to DB:
 create table `tabAsset Movement Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1174,7 +462,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,763 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,532 WARNING database DDL Query made to DB:
 create table `tabAsset Movement` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1198,7 +486,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,828 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,584 WARNING database DDL Query made to DB:
 create table `tabAsset Capitalization Asset Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1225,7 +513,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,891 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,635 WARNING database DDL Query made to DB:
 create table `tabAsset Repair Consumed Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1249,7 +537,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:40,943 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,686 WARNING database DDL Query made to DB:
 create table `tabDepreciation Schedule` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1271,7 +559,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,223 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,833 WARNING database DDL Query made to DB:
 create table `tabWebsite Attribute` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1289,7 +577,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,278 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,874 WARNING database DDL Query made to DB:
 create table `tabWebsite Filter Field` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1307,7 +595,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,338 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,912 WARNING database DDL Query made to DB:
 create table `tabHomepage Section Card` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1329,7 +617,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,390 WARNING database DDL Query made to DB:
+2026-07-20 02:22:59,955 WARNING database DDL Query made to DB:
 create table `tabHomepage Section` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1351,7 +639,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,453 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,007 WARNING database DDL Query made to DB:
 create table `tabMaintenance Schedule Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1383,7 +671,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,503 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,052 WARNING database DDL Query made to DB:
 create table `tabMaintenance Schedule Detail` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1410,7 +698,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,565 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,106 WARNING database DDL Query made to DB:
 create table `tabMaintenance Visit` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1449,7 +737,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,649 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,156 WARNING database DDL Query made to DB:
 create table `tabMaintenance Visit Purpose` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1475,7 +763,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,715 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,213 WARNING database DDL Query made to DB:
 create table `tabMaintenance Schedule` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1509,7 +797,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,778 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,266 WARNING database DDL Query made to DB:
 create table `tabImport Supplier Invoice` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1535,7 +823,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,838 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,310 WARNING database DDL Query made to DB:
 create table `tabSouth Africa VAT Settings` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1554,7 +842,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,917 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,366 WARNING database DDL Query made to DB:
 create table `tabLower Deduction Certificate` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1582,7 +870,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:41,977 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,412 WARNING database DDL Query made to DB:
 create table `tabUAE VAT Settings` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1601,7 +889,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,021 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,456 WARNING database DDL Query made to DB:
 create table `tabUAE VAT Account` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1619,7 +907,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,206 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,628 WARNING database DDL Query made to DB:
 create table `tabQuality Feedback` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1640,7 +928,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,255 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,668 WARNING database DDL Query made to DB:
 create table `tabQuality Goal Objective` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1660,7 +948,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,301 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,718 WARNING database DDL Query made to DB:
 create table `tabQuality Review` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1683,7 +971,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,348 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,765 WARNING database DDL Query made to DB:
 create table `tabQuality Review Objective` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1705,7 +993,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,394 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,811 WARNING database DDL Query made to DB:
 create table `tabQuality Action` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1730,7 +1018,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,442 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,869 WARNING database DDL Query made to DB:
 create table `tabQuality Feedback Template Parameter` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1748,7 +1036,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,511 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,918 WARNING database DDL Query made to DB:
 create table `tabQuality Procedure` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1774,7 +1062,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,562 WARNING database DDL Query made to DB:
+2026-07-20 02:23:00,968 WARNING database DDL Query made to DB:
 create table `tabQuality Goal` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1797,7 +1085,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,632 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,014 WARNING database DDL Query made to DB:
 create table `tabNon Conformance` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1823,7 +1111,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,681 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,065 WARNING database DDL Query made to DB:
 create table `tabQuality Meeting Minutes` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1843,7 +1131,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,723 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,104 WARNING database DDL Query made to DB:
 create table `tabQuality Action Resolution` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1865,7 +1153,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,770 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,149 WARNING database DDL Query made to DB:
 create table `tabQuality Feedback Template` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1884,7 +1172,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,812 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,192 WARNING database DDL Query made to DB:
 create table `tabQuality Meeting Agenda` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1902,7 +1190,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,850 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,232 WARNING database DDL Query made to DB:
 create table `tabQuality Procedure Process` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1921,7 +1209,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,898 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,288 WARNING database DDL Query made to DB:
 create table `tabQuality Feedback Parameter` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1941,7 +1229,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:42,943 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,337 WARNING database DDL Query made to DB:
 create table `tabQuality Meeting` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1960,7 +1248,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,002 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,386 WARNING database DDL Query made to DB:
 create table `tabCommunication Medium Timeslot` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -1981,7 +1269,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,049 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,432 WARNING database DDL Query made to DB:
 create table `tabCommunication Medium` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2004,7 +1292,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,100 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,479 WARNING database DDL Query made to DB:
 create table `tabVoice Call Settings` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2027,7 +1315,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,154 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,530 WARNING database DDL Query made to DB:
 create table `tabCall Log` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2060,7 +1348,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,206 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,575 WARNING database DDL Query made to DB:
 create table `tabIncoming Call Handling Schedule` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2081,7 +1369,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,247 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,619 WARNING database DDL Query made to DB:
 create table `tabTelephony Call Type` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2101,7 +1389,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,291 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,665 WARNING database DDL Query made to DB:
 create table `tabIncoming Call Settings` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2123,7 +1411,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,336 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,714 WARNING database DDL Query made to DB:
 create table `tabBulk Transaction Log Detail` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2152,7 +1440,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,452 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,811 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Receipt Supplied Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2190,7 +1478,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,532 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,896 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Receipt Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2256,7 +1544,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,619 WARNING database DDL Query made to DB:
+2026-07-20 02:23:01,966 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Order` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2309,7 +1597,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,680 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,024 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Order Supplied Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2340,7 +1628,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,760 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,095 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Order Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2392,7 +1680,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,820 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,147 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Order Service Item` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2421,7 +1709,7 @@ index parent(parent))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:43,906 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,201 WARNING database DDL Query made to DB:
 create table `tabSubcontracting BOM` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2451,7 +1739,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:44,048 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,289 WARNING database DDL Query made to DB:
 create table `tabSubcontracting Receipt` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2519,7 +1807,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:44,124 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,348 WARNING database DDL Query made to DB:
 create table `tabCode List` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2545,7 +1833,7 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:44,187 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,396 WARNING database DDL Query made to DB:
 create table `tabCommon Code` (
 			name varchar(140) primary key,
 			creation datetime(6),
@@ -2571,368 +1859,22 @@ index modified(modified))
 			ROW_FORMAT=DYNAMIC
 			CHARACTER SET=utf8mb4
 			COLLATE=utf8mb4_unicode_ci
-2026-07-20 01:54:44,212 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,417 WARNING database DDL Query made to DB:
 ALTER TABLE `tabCommon Code`
 				ADD INDEX IF NOT EXISTS `code_list_common_code_index`(code_list, common_code)
-2026-07-20 01:54:44,349 WARNING database DDL Query made to DB:
-ALTER TABLE `tabQuotation` ADD COLUMN `crm_deal` varchar(140)
-2026-07-20 01:54:44,351 WARNING database DDL Query made to DB:
-ALTER TABLE `tabQuotation` MODIFY `total_net_weight` decimal(21,9) not null default 0, MODIFY `base_discount_amount` decimal(21,9) not null default 0, MODIFY `total` decimal(21,9) not null default 0, MODIFY `additional_discount_percentage` decimal(21,9) not null default 0, MODIFY `base_grand_total` decimal(21,9) not null default 0, MODIFY `conversion_rate` decimal(21,9) not null default 0, MODIFY `base_rounding_adjustment` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `net_total` decimal(21,9) not null default 0, MODIFY `base_total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `rounding_adjustment` decimal(21,9) not null default 0, MODIFY `plc_conversion_rate` decimal(21,9) not null default 0, MODIFY `rounded_total` decimal(21,9) not null default 0, MODIFY `total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `grand_total` decimal(21,9) not null default 0, MODIFY `base_net_total` decimal(21,9) not null default 0, MODIFY `base_rounded_total` decimal(21,9) not null default 0, MODIFY `total_qty` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0
-2026-07-20 01:54:44,384 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,524 WARNING database DDL Query made to DB:
 ALTER TABLE `tabCustomer` ADD COLUMN `crm_deal` varchar(140)
-2026-07-20 01:54:44,386 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,526 WARNING database DDL Query made to DB:
 ALTER TABLE `tabCustomer` MODIFY `default_commission_rate` decimal(21,9) not null default 0
-2026-07-20 01:54:48,128 WARNING database DDL Query made to DB:
-ALTER TABLE `tabAddress` ADD COLUMN `tax_category` varchar(140), ADD COLUMN `is_your_company_address` int(1) not null default 0
-2026-07-20 01:54:48,149 WARNING database DDL Query made to DB:
+2026-07-20 02:23:02,552 WARNING database DDL Query made to DB:
+ALTER TABLE `tabQuotation` ADD COLUMN `crm_deal` varchar(140)
+2026-07-20 02:23:02,555 WARNING database DDL Query made to DB:
+ALTER TABLE `tabQuotation` MODIFY `base_net_total` decimal(21,9) not null default 0, MODIFY `total_net_weight` decimal(21,9) not null default 0, MODIFY `discount_amount` decimal(21,9) not null default 0, MODIFY `net_total` decimal(21,9) not null default 0, MODIFY `grand_total` decimal(21,9) not null default 0, MODIFY `plc_conversion_rate` decimal(21,9) not null default 0, MODIFY `total` decimal(21,9) not null default 0, MODIFY `base_discount_amount` decimal(21,9) not null default 0, MODIFY `rounding_adjustment` decimal(21,9) not null default 0, MODIFY `base_total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `total_taxes_and_charges` decimal(21,9) not null default 0, MODIFY `base_grand_total` decimal(21,9) not null default 0, MODIFY `rounded_total` decimal(21,9) not null default 0, MODIFY `base_rounding_adjustment` decimal(21,9) not null default 0, MODIFY `conversion_rate` decimal(21,9) not null default 0, MODIFY `base_total` decimal(21,9) not null default 0, MODIFY `base_rounded_total` decimal(21,9) not null default 0, MODIFY `additional_discount_percentage` decimal(21,9) not null default 0, MODIFY `total_qty` decimal(21,9) not null default 0
+2026-07-20 02:23:06,222 WARNING database DDL Query made to DB:
 ALTER TABLE `tabContact` ADD COLUMN `is_billing_contact` int(1) not null default 0
-2026-07-20 01:54:48,249 WARNING database DDL Query made to DB:
-ALTER TABLE `tabCommunication` ADD COLUMN `company` varchar(140)
-2026-07-20 01:54:48,279 WARNING database DDL Query made to DB:
+2026-07-20 02:23:06,241 WARNING database DDL Query made to DB:
+ALTER TABLE `tabAddress` ADD COLUMN `tax_category` varchar(140), ADD COLUMN `is_your_company_address` int(1) not null default 0
+2026-07-20 02:23:06,329 WARNING database DDL Query made to DB:
 ALTER TABLE `tabEmail Account` ADD COLUMN `company` varchar(140)
-2026-07-20 02:10:25,112 WARNING database DDL Query made to DB:
-CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT,
-            owner_email VARCHAR(255) NOT NULL,
-            company_slug VARCHAR(64) NOT NULL,
-            site_name VARCHAR(255) NOT NULL,
-            tenant_domain VARCHAR(255) NOT NULL,
-            status VARCHAR(32) NOT NULL,
-            log_text LONGTEXT,
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_owner_email (owner_email),
-            UNIQUE KEY uq_company_slug (company_slug)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-2026-07-20 02:11:29,366 WARNING database DDL Query made to DB:
-CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT,
-            owner_email VARCHAR(255) NOT NULL,
-            company_slug VARCHAR(64) NOT NULL,
-            site_name VARCHAR(255) NOT NULL,
-            tenant_domain VARCHAR(255) NOT NULL,
-            status VARCHAR(32) NOT NULL,
-            log_text LONGTEXT,
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_owner_email (owner_email),
-            UNIQUE KEY uq_company_slug (company_slug)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-2026-07-20 02:11:34,607 WARNING database DDL Query made to DB:
-CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT,
-            owner_email VARCHAR(255) NOT NULL,
-            company_slug VARCHAR(64) NOT NULL,
-            site_name VARCHAR(255) NOT NULL,
-            tenant_domain VARCHAR(255) NOT NULL,
-            status VARCHAR(32) NOT NULL,
-            log_text LONGTEXT,
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_owner_email (owner_email),
-            UNIQUE KEY uq_company_slug (company_slug)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-2026-07-20 02:21:17,244 WARNING database DDL Query made to DB:
-CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT,
-            owner_email VARCHAR(255) NOT NULL,
-            company_slug VARCHAR(64) NOT NULL,
-            site_name VARCHAR(255) NOT NULL,
-            tenant_domain VARCHAR(255) NOT NULL,
-            status VARCHAR(32) NOT NULL,
-            log_text LONGTEXT,
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_owner_email (owner_email),
-            UNIQUE KEY uq_company_slug (company_slug)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-2026-07-20 02:21:43,739 WARNING database DDL Query made to DB:
-CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT,
-            owner_email VARCHAR(255) NOT NULL,
-            company_slug VARCHAR(64) NOT NULL,
-            site_name VARCHAR(255) NOT NULL,
-            tenant_domain VARCHAR(255) NOT NULL,
-            status VARCHAR(32) NOT NULL,
-            log_text LONGTEXT,
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_owner_email (owner_email),
-            UNIQUE KEY uq_company_slug (company_slug)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-2026-07-20 02:22:16,642 WARNING database DDL Query made to DB:
-CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT,
-            owner_email VARCHAR(255) NOT NULL,
-            company_slug VARCHAR(64) NOT NULL,
-            site_name VARCHAR(255) NOT NULL,
-            tenant_domain VARCHAR(255) NOT NULL,
-            status VARCHAR(32) NOT NULL,
-            log_text LONGTEXT,
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_owner_email (owner_email),
-            UNIQUE KEY uq_company_slug (company_slug)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
-2026-07-20 02:22:17,299 WARNING database DDL Query made to DB:
-DROP USER IF EXISTS '_9921b8854be32c5b'@'172.21.0.1'
-2026-07-20 02:22:17,301 WARNING database DDL Query made to DB:
-DROP DATABASE IF EXISTS `_9921b8854be32c5b`
-2026-07-20 02:22:17,304 WARNING database DDL Query made to DB:
-CREATE USER '_9921b8854be32c5b'@'172.21.0.1' IDENTIFIED BY 'SRpiRu5VzVMIxJUx'
-2026-07-20 02:22:17,307 WARNING database DDL Query made to DB:
-CREATE DATABASE `_9921b8854be32c5b` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-2026-07-20 02:22:17,435 WARNING database DDL Query made to DB:
-create table if not exists `__Auth` (
-				`doctype` VARCHAR(140) NOT NULL,
-				`name` VARCHAR(255) NOT NULL,
-				`fieldname` VARCHAR(140) NOT NULL,
-				`password` TEXT NOT NULL,
-				`encrypted` INT(1) NOT NULL DEFAULT 0,
-				PRIMARY KEY (`doctype`, `name`, `fieldname`)
-			) ENGINE=InnoDB ROW_FORMAT=DYNAMIC CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:17,438 WARNING database DDL Query made to DB:
-create table __global_search(
-				doctype varchar(100),
-				name varchar(140),
-				title varchar(140),
-				content text,
-				fulltext(content),
-				route varchar(140),
-				published int(1) not null default 0,
-				unique `doctype_name` (doctype, name))
-				COLLATE=utf8mb4_unicode_ci
-				ENGINE=MyISAM
-				CHARACTER SET=utf8mb4
-2026-07-20 02:22:17,441 WARNING database DDL Query made to DB:
-create table if not exists __UserSettings (
-			`user` VARCHAR(180) NOT NULL,
-			`doctype` VARCHAR(180) NOT NULL,
-			`data` TEXT,
-			UNIQUE(user, doctype)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:17,705 WARNING database DDL Query made to DB:
-create table `tabDocType State` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`title` varchar(140),
-`color` varchar(140) default 'Blue',
-`custom` int(1) not null default 0,
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:17,768 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocField` ADD COLUMN `non_negative` int(1) not null default 0, ADD COLUMN `is_virtual` int(1) not null default 0, ADD COLUMN `sort_options` int(1) not null default 0, ADD COLUMN `link_filters` json, ADD COLUMN `fetch_from` text, ADD COLUMN `show_on_timeline` int(1) not null default 0, ADD COLUMN `make_attachment_public` int(1) not null default 0, ADD COLUMN `documentation_url` varchar(140), ADD COLUMN `placeholder` varchar(140)
-2026-07-20 02:22:17,776 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocField` MODIFY `label` varchar(140), MODIFY `depends_on` longtext, MODIFY `print_width` varchar(64), MODIFY `max_height` varchar(64), MODIFY `mandatory_depends_on` longtext, MODIFY `oldfieldname` varchar(140), MODIFY `oldfieldtype` varchar(140), MODIFY `fieldtype` varchar(140) default 'Data', MODIFY `collapsible_depends_on` longtext, MODIFY `read_only_depends_on` longtext, MODIFY `width` varchar(64), MODIFY `fieldname` varchar(140), MODIFY `precision` varchar(140)
-2026-07-20 02:22:17,831 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocPerm` ADD COLUMN `if_owner` int(1) not null default 0, ADD COLUMN `select` int(1) not null default 0
-2026-07-20 02:22:17,835 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocPerm` MODIFY `role` varchar(140)
-2026-07-20 02:22:17,863 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocType Action` ADD COLUMN `hidden` int(1) not null default 0, ADD COLUMN `custom` int(1) not null default 0
-2026-07-20 02:22:17,891 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocType Link` ADD COLUMN `parent_doctype` varchar(140), ADD COLUMN `table_fieldname` varchar(140), ADD COLUMN `hidden` int(1) not null default 0, ADD COLUMN `is_child_table` int(1) not null default 0, ADD COLUMN `custom` int(1) not null default 0
-2026-07-20 02:22:17,946 WARNING database DDL Query made to DB:
-create table `tabForm Tour Step` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`ui_tour` int(1) not null default 0,
-`is_table_field` int(1) not null default 0,
-`title` varchar(140),
-`parent_fieldname` varchar(140),
-`fieldname` varchar(140),
-`element_selector` varchar(140),
-`parent_element_selector` varchar(140),
-`description` longtext,
-`ondemand_description` longtext,
-`position` varchar(140) default 'Bottom',
-`hide_buttons` int(1) not null default 0,
-`popover_element` int(1) not null default 0,
-`modal_trigger` int(1) not null default 0,
-`offset_x` int(11) not null default 0,
-`offset_y` int(11) not null default 0,
-`next_on_click` int(1) not null default 0,
-`label` varchar(140),
-`fieldtype` varchar(140) default '0',
-`has_next_condition` int(1) not null default 0,
-`next_step_condition` longtext,
-`next_form_tour` varchar(140),
-`child_doctype` varchar(140),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:17,995 WARNING database DDL Query made to DB:
-create table `tabForm Tour` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`title` varchar(140) unique,
-`view_name` varchar(140),
-`workspace_name` varchar(140),
-`list_name` varchar(140) default 'List',
-`report_name` varchar(140),
-`dashboard_name` varchar(140),
-`new_document_form` int(1) not null default 0,
-`page_name` varchar(140),
-`reference_doctype` varchar(140),
-`module` varchar(140),
-`ui_tour` int(1) not null default 0,
-`track_steps` int(1) not null default 0,
-`is_standard` int(1) not null default 0,
-`save_on_complete` int(1) not null default 0,
-`first_document` int(1) not null default 0,
-`include_name_field` int(1) not null default 0,
-`page_route` text,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:18,076 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocType` ADD COLUMN `is_calendar_and_gantt` int(1) not null default 0, ADD COLUMN `quick_entry` int(1) not null default 0, ADD COLUMN `grid_page_length` int(11) not null default 50, ADD COLUMN `rows_threshold_for_grid_search` int(11) not null default 20, ADD COLUMN `track_views` int(1) not null default 0, ADD COLUMN `queue_in_background` int(1) not null default 0, ADD COLUMN `documentation` varchar(140), ADD COLUMN `nsm_parent_field` varchar(140), ADD COLUMN `allow_events_in_timeline` int(1) not null default 0, ADD COLUMN `allow_auto_repeat` int(1) not null default 0, ADD COLUMN `make_attachments_public` int(1) not null default 0, ADD COLUMN `default_view` varchar(140), ADD COLUMN `force_re_route_to_default_view` int(1) not null default 0, ADD COLUMN `show_preview_popup` int(1) not null default 0, ADD COLUMN `default_email_template` varchar(140), ADD COLUMN `sender_name_field` varchar(140), ADD COLUMN `recipient_account_field` varchar(140), ADD COLUMN `protect_attached_files` int(1) not null default 0, ADD COLUMN `index_web_pages_for_search` int(1) not null default 1, ADD COLUMN `row_format` varchar(140) default 'Dynamic', ADD COLUMN `_comments` text, ADD COLUMN `_assign` text, ADD COLUMN `_liked_by` text
-2026-07-20 02:22:18,081 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocType` MODIFY `allow_rename` int(1) not null default 1, MODIFY `autoname` varchar(140), MODIFY `website_search_field` varchar(140), MODIFY `is_published_field` varchar(140), MODIFY `route` varchar(140), MODIFY `naming_rule` varchar(64), MODIFY `image_field` varchar(140), MODIFY `sort_order` varchar(140) default 'DESC', MODIFY `_user_tags` text, MODIFY `document_type` varchar(140), MODIFY `migration_hash` varchar(140), MODIFY `engine` varchar(140) default 'InnoDB', MODIFY `default_print_format` varchar(140), MODIFY `color` varchar(140), MODIFY `sort_field` varchar(140) default 'modified', MODIFY `icon` varchar(140), MODIFY `search_fields` varchar(140), MODIFY `sender_field` varchar(140), MODIFY `title_field` varchar(140), MODIFY `restrict_to_domain` varchar(140), MODIFY `timeline_field` varchar(140), MODIFY `subject_field` varchar(140), MODIFY `module` varchar(140)
-2026-07-20 02:22:18,084 WARNING database DDL Query made to DB:
-ALTER TABLE `tabDocType` ADD INDEX `module_index`(`module`)
-2026-07-20 02:22:18,161 WARNING database DDL Query made to DB:
-create table `tabRole` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`role_name` varchar(140) unique,
-`home_page` varchar(140),
-`restrict_to_domain` varchar(140),
-`disabled` int(1) not null default 0,
-`is_custom` int(1) not null default 0,
-`desk_access` int(1) not null default 1,
-`two_factor_auth` int(1) not null default 0,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:18,220 WARNING database DDL Query made to DB:
-create table `tabHas Role` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`role` varchar(140),
-parent varchar(140),
-parentfield varchar(140),
-parenttype varchar(140),
-index parent(parent))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
-2026-07-20 02:22:18,274 WARNING database DDL Query made to DB:
-create table `tabCustom Field` (
-			name varchar(140) primary key,
-			creation datetime(6),
-			modified datetime(6),
-			modified_by varchar(140),
-			owner varchar(140),
-			docstatus int(1) not null default '0',
-			idx int(8) not null default '0',
-			`is_system_generated` int(1) not null default 0,
-`dt` varchar(140),
-`module` varchar(140),
-`label` varchar(255),
-`placeholder` varchar(140),
-`fieldname` varchar(140),
-`insert_after` varchar(140),
-`length` int(11) not null default 0,
-`link_filters` json,
-`fieldtype` varchar(140) default 'Data',
-`precision` varchar(140),
-`hide_seconds` int(1) not null default 0,
-`hide_days` int(1) not null default 0,
-`options` text,
-`sort_options` int(1) not null default 0,
-`fetch_from` text,
-`fetch_if_empty` int(1) not null default 0,
-`collapsible` int(1) not null default 0,
-`collapsible_depends_on` longtext,
-`default` text,
-`depends_on` longtext,
-`mandatory_depends_on` longtext,
-`read_only_depends_on` longtext,
-`non_negative` int(1) not null default 0,
-`reqd` int(1) not null default 0,
-`unique` int(1) not null default 0,
-`is_virtual` int(1) not null default 0,
-`read_only` int(1) not null default 0,
-`ignore_user_permissions` int(1) not null default 0,
-`hidden` int(1) not null default 0,
-`print_hide` int(1) not null default 0,
-`print_hide_if_no_value` int(1) not null default 0,
-`print_width` varchar(140),
-`no_copy` int(1) not null default 0,
-`allow_on_submit` int(1) not null default 0,
-`in_list_view` int(1) not null default 0,
-`in_standard_filter` int(1) not null default 0,
-`in_global_search` int(1) not null default 0,
-`in_preview` int(1) not null default 0,
-`bold` int(1) not null default 0,
-`report_hide` int(1) not null default 0,
-`search_index` int(1) not null default 0,
-`allow_in_quick_entry` int(1) not null default 0,
-`ignore_xss_filter` int(1) not null default 0,
-`translatable` int(1) not null default 0,
-`hide_border` int(1) not null default 0,
-`show_dashboard` int(1) not null default 0,
-`description` text,
-`permlevel` int(11) not null default 0,
-`width` varchar(140),
-`columns` int(11) not null default 0,
-`_user_tags` text,
-`_comments` text,
-`_assign` text,
-`_liked_by` text,
-index `dt`(`dt`),
-index modified(modified))
-			ENGINE=InnoDB
-			ROW_FORMAT=DYNAMIC
-			CHARACTER SET=utf8mb4
-			COLLATE=utf8mb4_unicode_ci
+2026-07-20 02:23:06,351 WARNING database DDL Query made to DB:
+ALTER TABLE `tabCommunication` ADD COLUMN `company` varchar(140)
