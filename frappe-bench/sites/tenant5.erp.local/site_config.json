@@ -1,0 +1,8 @@
+{
+ "db_host": "127.0.0.1",
+ "db_name": "_7b39057cfb74da60",
+ "db_password": "kholDmYA1HBnUJRv",
+ "db_port": 3307,
+ "db_type": "mariadb",
+ "host_name": "https://tenant5.erp.local"
+}

@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "check-port-8000-localhost",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -o /tmp/saas_local.html -w '%{http_code}\\n' http://127.0.0.1:8000/saas"
+			]
+		}
+	]
+}

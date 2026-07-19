@@ -1,0 +1,126 @@
+:root {
+	--bg-1: #f4f7fb;
+	--bg-2: #e7eef8;
+	--text-1: #152238;
+	--text-2: #4e5b70;
+	--brand: #0059b8;
+	--brand-2: #00836b;
+	--surface: #ffffff;
+	--border: #d4dce8;
+	--danger: #b02f3f;
+}
+
+body {
+	margin: 0;
+	font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+	color: var(--text-1);
+	background: radial-gradient(circle at 20% 20%, #ffffff 0%, var(--bg-1) 35%, var(--bg-2) 100%);
+}
+
+.saas-shell {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 28px 16px;
+}
+
+.saas-card {
+	width: min(560px, 100%);
+	border: 1px solid var(--border);
+	background: var(--surface);
+	border-radius: 18px;
+	box-shadow: 0 18px 50px rgba(14, 31, 53, 0.14);
+	overflow: hidden;
+}
+
+.saas-hero {
+	padding: 24px;
+	background: linear-gradient(132deg, #004186, #0059b8 55%, #00785f);
+	color: #fff;
+}
+
+.saas-hero h1 {
+	margin: 0 0 6px;
+	font-size: 26px;
+	line-height: 1.2;
+}
+
+.saas-hero p {
+	margin: 0;
+	opacity: 0.92;
+}
+
+.saas-form {
+	padding: 22px;
+	display: grid;
+	gap: 14px;
+}
+
+.field {
+	display: grid;
+	gap: 6px;
+}
+
+.field label {
+	font-size: 14px;
+	color: var(--text-2);
+}
+
+.field input {
+	height: 44px;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 0 12px;
+	font-size: 15px;
+}
+
+.field input:focus {
+	outline: 2px solid rgba(0, 89, 184, 0.18);
+	border-color: var(--brand);
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.btn {
+	height: 42px;
+	padding: 0 16px;
+	border-radius: 10px;
+	border: 1px solid transparent;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.btn-primary {
+	background: var(--brand);
+	color: #fff;
+}
+
+.btn-secondary {
+	background: #fff;
+	border-color: var(--border);
+	color: var(--text-1);
+}
+
+.notice {
+	border: 1px solid var(--border);
+	background: #f9fbff;
+	color: var(--text-2);
+	border-radius: 10px;
+	padding: 10px 12px;
+	font-size: 14px;
+}
+
+.notice.error {
+	border-color: #f0c7cf;
+	background: #fff4f6;
+	color: var(--danger);
+}
+
+.hidden {
+	display: none;
+}

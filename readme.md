@@ -216,6 +216,37 @@ Stop:
 - In bench terminal: `Ctrl + C`
 - Infra: `docker compose down`
 
+### One-command start/stop (recommended)
+
+From project root:
+
+```bash
+cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT
+./start_all.sh web
+```
+
+For full dev stack (watch, workers, scheduler, socketio):
+
+```bash
+./start_all.sh full
+```
+
+Stop everything:
+
+```bash
+./stop_all.sh
+```
+
+Default working URLs after startup:
+
+- `http://localhost:8000/login`
+- `http://crysomedia.127.0.0.1.nip.io:8000/login`
+
+SaaS onboarding page:
+
+- `http://localhost:8000/saas`
+- `http://crysomedia.127.0.0.1.nip.io:8000/saas`
+
 ## 7. Quick Troubleshooting
 
 ### App not opening
@@ -248,3 +279,147 @@ All containers should be `Up`.
 - Node 18 is recommended for ERPNext/Frappe v15 asset pipeline.
 - `wkhtmltopdf` may be needed later for PDF generation, but core dev setup works without it.
 - Change default passwords before using beyond local development.
+
+## 9. Multi-Tenant SaaS Setup (Implemented)
+
+This workspace is now configured for host-based multi-tenancy:
+
+- `frappe-bench/sites/common_site_config.json` has:
+  - `dns_multitenant: true`
+  - `serve_default_site: false`
+
+### 9.1 Local domain routing for tenants
+
+For local testing, map tenant domains in `/etc/hosts`:
+
+```text
+127.0.0.1 tenant1.erp.local
+127.0.0.1 tenant2.erp.local
+```
+
+Then access tenants via:
+
+- `http://tenant1.erp.local:8000`
+- `http://tenant2.erp.local:8000`
+
+No-hosts-file alternative (works without sudo edits):
+
+- `http://tenant1.127.0.0.1.nip.io:8000`
+- `http://tenant2.127.0.0.1.nip.io:8000`
+
+### 9.2 Create a new tenant (automated)
+
+Use the provisioning script:
+
+```bash
+cd frappe-bench
+chmod +x scripts/provision_tenant.sh
+./scripts/provision_tenant.sh tenant1.erp.local admin root
+```
+
+Arguments:
+
+1. site-domain (required)
+2. admin-password (optional, default: `admin`)
+3. db-root-password (optional, default: `root`)
+
+Optional env vars:
+
+- `DB_HOST` (default: `127.0.0.1`)
+- `DB_PORT` (default: `3307`)
+- `DB_ROOT_USER` (default: `root`)
+- `ERP_APP` (default: `erpnext`)
+- `DB_CONTAINER` (default: `erp-mariadb`)
+- `SKIP_DB_GRANT` (default: `false`)
+
+The provisioning script also ensures DB grants for `site_db_user@'%'` in MariaDB by default, which avoids host-bridge auth issues in Docker-based local setups.
+
+### 9.3 Production SaaS checklist
+
+1. Use wildcard DNS: `*.yourdomain.com` -> load balancer/IP.
+2. Use wildcard TLS cert for `*.yourdomain.com`.
+3. Put Frappe behind Nginx/Traefik/Caddy and preserve the host header.
+4. Keep one ERPNext site/database per tenant.
+5. Add scheduled per-tenant backups and restore testing.
+
+### 9.4 Validate multi-tenant setup (automated)
+
+Run the validation script after creating at least two tenant sites:
+
+```bash
+cd frappe-bench
+chmod +x scripts/validate_multitenant.sh
+./scripts/validate_multitenant.sh erp.local tenant2.erp.local
+```
+
+What it validates:
+
+1. Docker daemon is reachable.
+2. MariaDB container is running.
+3. Both site configs exist in `sites/<tenant>/site_config.json`.
+4. Each site maps to a different `db_name`.
+5. Both mapped databases exist in MariaDB.
+6. HTTP host-based routing works for both tenants on port `8000`.
+
+## 10. SaaS Onboarding API (Implemented)
+
+The custom app `saas_control` is installed on `erp.local` and provides two guest APIs:
+
+1. `saas_control.saas_control.api.create_or_login`
+2. `saas_control.saas_control.api.resolve_tenant`
+
+### 10.1 New user signup -> create new tenant site
+
+POST endpoint:
+
+```text
+/api/method/saas_control.saas_control.api.create_or_login
+```
+
+Sample payload:
+
+```json
+{
+  "email": "owner1@example.com",
+  "full_name": "Owner One",
+  "company_slug": "tenant3",
+  "password": "StrongPass@123"
+}
+```
+
+Behavior:
+
+1. Checks tenant registry by email.
+2. If not found, provisions `tenant3.erp.local` synchronously using `scripts/provision_tenant.sh`.
+3. Saves mapping in registry table.
+4. Returns tenant login redirect URL.
+
+### 10.2 Existing user -> redirect to tenant login
+
+If the same email already exists in registry, `create_or_login` skips provisioning and returns existing tenant login redirect.
+
+You can also resolve directly:
+
+```text
+/api/method/saas_control.saas_control.api.resolve_tenant
+```
+
+Sample payload:
+
+```json
+{
+  "email": "owner1@example.com"
+}
+```
+
+### 10.3 Config knobs (optional)
+
+Set these in `sites/common_site_config.json` if needed:
+
+- `saas_base_domain` (default: `erp.local`)
+- `saas_db_host` (default: `127.0.0.1`)
+- `saas_db_port` (default: `3307`)
+- `saas_db_root_user` (default: `root`)
+- `saas_db_root_password` (default: `root`)
+- `saas_db_container` (default: `erp-mariadb`)
+- `saas_erp_app` (default: `erpnext`)

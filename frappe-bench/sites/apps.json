@@ -17,5 +17,12 @@
         "required": [],
         "idx": 2,
         "version": "15.116.0"
+    },
+    "saas_control": {
+        "is_repo": false,
+        "resolution": "not a repo",
+        "required": [],
+        "idx": 3,
+        "version": "0.0.1"
     }
 }

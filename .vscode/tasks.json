@@ -1,0 +1,385 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "saas-api-smoke",
+			"type": "shell",
+			"command": "cd frappe-bench && ./env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='sites'); frappe.connect(); from saas_control.saas_control import api; print(api.resolve_tenant('owner2@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-pycompile-check",
+			"type": "shell",
+			"command": "python3 -m py_compile frappe-bench/apps/saas_control/saas_control/saas_control/api.py",
+			"isBackground": false
+		},
+		{
+			"label": "saas-cwd-check",
+			"type": "shell",
+			"command": "cd frappe-bench && pwd && ls logs | head -n 3",
+			"isBackground": false
+		},
+		{
+			"label": "saas-resolve-smoke",
+			"type": "shell",
+			"command": "cd frappe-bench && ./env/bin/python - <<'PY'\nimport frappe\nfrappe.init(site='erp.local', sites_path='sites')\nfrappe.connect()\nfrom saas_control.saas_control import api\nprint(api.resolve_tenant('owner2@example.com'))\nfrappe.destroy()\nPY",
+			"isBackground": false
+		},
+		{
+			"label": "saas-resolve-smoke-2",
+			"type": "shell",
+			"command": "./frappe-bench/env/bin/python -c \"import os, frappe; os.chdir('/Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench'); frappe.init(site='erp.local'); frappe.connect(); from saas_control.saas_control import api; print(api.resolve_tenant('owner2@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-resolve-smoke-3",
+			"type": "shell",
+			"command": "./frappe-bench/env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='/Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/sites'); frappe.connect(); from saas_control.saas_control import api; print(api.resolve_tenant('owner2@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-resolve-smoke-4",
+			"type": "shell",
+			"command": "FRAPPE_BENCH_ROOT=/Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench ./frappe-bench/env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='/Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/sites'); frappe.connect(); from saas_control.saas_control import api; print(api.resolve_tenant('owner2@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-resolve-smoke-5",
+			"type": "shell",
+			"command": "cd frappe-bench/sites && ../env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='.'); frappe.connect(); from saas_control.saas_control import api; print(api.resolve_tenant('owner2@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-create-or-login-existing",
+			"type": "shell",
+			"command": "cd frappe-bench/sites && ../env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='.'); frappe.connect(); from saas_control.saas_control import api; print(api.create_or_login(email='owner2@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-create-or-login-new",
+			"type": "shell",
+			"command": "cd frappe-bench/sites && ../env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='.'); frappe.connect(); from saas_control.saas_control import api; print(api.create_or_login(email='owner5@example.com', full_name='Owner Five', company_slug='tenant5', password='admin')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-registry-check",
+			"type": "shell",
+			"command": "docker exec erp-mariadb mysql -uroot -proot -e \"SELECT owner_email, company_slug, site_name, status FROM _87c647131f7846f5.__saas_tenant_registry ORDER BY id DESC LIMIT 5;\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-registry-check-2",
+			"type": "shell",
+			"command": "docker exec erp-mariadb mysql -uroot -proot -e \"SELECT owner_email, company_slug, site_name, status FROM _87c163f594e3ade7.__saas_tenant_registry ORDER BY id DESC LIMIT 5;\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-pycompile-check-2",
+			"type": "shell",
+			"command": "python3 -m py_compile frappe-bench/apps/saas_control/saas_control/saas_control/api.py",
+			"isBackground": false
+		},
+		{
+			"label": "saas-resolve-smoke-after-patch",
+			"type": "shell",
+			"command": "cd frappe-bench/sites && ../env/bin/python -c \"import frappe; frappe.init(site='erp.local', sites_path='.'); frappe.connect(); from saas_control.saas_control import api; print('owner2', api.resolve_tenant('owner2@example.com')); print('owner1', api.resolve_tenant('owner1@example.com')); frappe.destroy()\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-registry-check-3",
+			"type": "shell",
+			"command": "docker exec erp-mariadb mysql -uroot -proot -e \"SELECT owner_email, company_slug, site_name, status FROM _87c163f594e3ade7.__saas_tenant_registry ORDER BY id DESC;\"",
+			"isBackground": false
+		},
+		{
+			"label": "saas-page-smoke",
+			"type": "shell",
+			"command": "curl -s -o /tmp/saas_page.html -w \"%{http_code}\" http://erp.local:8000/saas && echo && rg -n \"Launch Your ERP Tenant|saas_portal.js\" /tmp/saas_page.html"
+		},
+		{
+			"label": "saas-api-resolve-smoke-ui",
+			"type": "shell",
+			"command": "cd frappe-bench/sites && ../env/bin/python - <<'PY'\nimport frappe\nfrappe.init(site='erp.local', sites_path='.')\nfrappe.connect()\nfrom saas_control.saas_control.api import resolve_tenant\nprint(resolve_tenant('owner2@example.com'))\nfrappe.destroy()\nPY"
+		},
+		{
+			"label": "runtime-docker-ps",
+			"type": "shell",
+			"command": "docker",
+			"args": [
+				"compose",
+				"ps"
+			]
+		},
+		{
+			"label": "runtime-saas-http-check",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -o /tmp/saas_page.html -w '%{http_code}\\n' http://erp.local:8000/saas"
+			]
+		},
+		{
+			"label": "check-port-8000-localhost",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -o /tmp/saas_local.html -w '%{http_code}\\n' http://127.0.0.1:8000/saas"
+			]
+		},
+		{
+			"label": "start-frappe-web-8000",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && bench serve --port 8000"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "verify-saas-localhost-after-start",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -o /tmp/saas_local_after.html -w '%{http_code}\\n' http://127.0.0.1:8000/saas"
+			]
+		},
+		{
+			"label": "verify-saas-erp-local-after-start",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -o /tmp/saas_erp_after.html -w '%{http_code}\\n' http://erp.local:8000/saas"
+			]
+		},
+		{
+			"label": "inspect-saas-html-markers",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"grep -E 'SaaS|saas_portal.js|saas_portal.css|create_or_login|resolve_tenant' -n /tmp/saas_erp_after.html | head -n 20"
+			]
+		},
+		{
+			"label": "inspect-saas-html-markers-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"grep -E \"SaaS|saas_portal.js|saas_portal.css|create_or_login|resolve_tenant\" -n /tmp/saas_erp_after.html | head -n 20"
+			]
+		},
+		{
+			"label": "saas-api-resolve-post-web-start",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && ../env/bin/python -c \"import frappe, json; frappe.init(site='erp.local'); frappe.connect(); from saas_control.saas_control.api import resolve_tenant; print(json.dumps(resolve_tenant('owner2@example.com'), default=str)); frappe.destroy()\""
+			]
+		},
+		{
+			"label": "saas-api-resolve-post-web-start-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && ../env/bin/python -c \"import frappe, json; frappe.init(site=\\\"erp.local\\\"); frappe.connect(); from saas_control.saas_control.api import resolve_tenant; print(json.dumps(resolve_tenant(\\\"owner2@example.com\\\"), default=str)); frappe.destroy()\""
+			]
+		},
+		{
+			"label": "check-localhost-8000-before-alias",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -I http://localhost:8000/login | head -n 5"
+			]
+		},
+		{
+			"label": "check-crysomedia-before-alias",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -I http://crysomedia.erp.local:8000/login | head -n 5"
+			]
+		},
+		{
+			"label": "list-sites-for-localhost-alias",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"ls -la frappe-bench/sites | egrep 'localhost|crysomedia|erp.local'"
+			]
+		},
+		{
+			"label": "http-site-via-host-header",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -I -H 'Host: crysomedia.erp.local' http://127.0.0.1:8000/login | head -n 5"
+			]
+		},
+		{
+			"label": "list-sites-for-localhost-alias-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"ls -la frappe-bench/sites | egrep \"localhost|crysomedia|erp.local\""
+			]
+		},
+		{
+			"label": "http-site-via-host-header-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -I -H \"Host: crysomedia.erp.local\" http://127.0.0.1:8000/login | head -n 5"
+			]
+		},
+		{
+			"label": "add-host-entry-crysomedia-no-sudo",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"printf '\\n127.0.0.1 crysomedia.erp.local\\n' >> /etc/hosts"
+			]
+		},
+		{
+			"label": "verify-dns-crysomedia",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"dscacheutil -q host -a name crysomedia.erp.local || true"
+			]
+		},
+		{
+			"label": "add-host-entry-crysomedia-correct",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"printf \"\\n127.0.0.1 crysomedia.erp.local\\n\" >> /etc/hosts"
+			]
+		},
+		{
+			"label": "probe-localhost-site-via-saas-method",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -X POST 'http://localhost:8000/api/method/saas_control.saas_control.api.resolve_tenant' -H 'Content-Type: application/json' --data '{\"email\":\"owner2@example.com\"}' | head -c 300"
+			]
+		},
+		{
+			"label": "probe-crysomedia-hostheader-saas-method",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -X POST 'http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant' -H 'Host: crysomedia.erp.local' -H 'Content-Type: application/json' --data '{\"email\":\"owner2@example.com\"}' | head -c 300"
+			]
+		},
+		{
+			"label": "create-nipio-site-alias",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && [ -e crysomedia.127.0.0.1.nip.io ] || ln -s crysomedia.erp.local crysomedia.127.0.0.1.nip.io && ls -la crysomedia.127.0.0.1.nip.io"
+			]
+		},
+		{
+			"label": "test-nipio-login-url",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -I http://crysomedia.127.0.0.1.nip.io:8000/login | head -n 5"
+			]
+		},
+		{
+			"label": "chmod-start-all-script",
+			"type": "shell",
+			"command": "chmod",
+			"args": [
+				"+x",
+				"start_all.sh"
+			]
+		},
+		{
+			"label": "validate-start-all-syntax",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-n",
+				"start_all.sh"
+			]
+		},
+		{
+			"label": "verify-resolve-redirect-url",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && ../env/bin/python -c \"import frappe, json; frappe.init(site='erp.local'); frappe.connect(); from saas_control.saas_control.api import resolve_tenant; print(json.dumps(resolve_tenant('owner2@example.com'), default=str)); frappe.destroy()\""
+			]
+		},
+		{
+			"label": "verify-resolve-redirect-url-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && ../env/bin/python -c \"import frappe, json; frappe.init(site=\\\"erp.local\\\"); frappe.connect(); from saas_control.saas_control.api import resolve_tenant; print(json.dumps(resolve_tenant(\\\"owner2@example.com\\\"), default=str)); frappe.destroy()\""
+			]
+		},
+		{
+			"label": "verify-http-api-redirect-from-localhost",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -sS -X POST 'http://localhost:8000/api/method/saas_control.saas_control.api.resolve_tenant' --data-urlencode 'email=owner2@example.com' | head -c 500"
+			]
+		},
+		{
+			"label": "chmod-stop-script",
+			"type": "shell",
+			"command": "chmod",
+			"args": [
+				"+x",
+				"stop_all.sh"
+			]
+		},
+		{
+			"label": "validate-stop-script-syntax",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-n",
+				"stop_all.sh"
+			]
+		},
+		{
+			"label": "validate-start-script-syntax-again",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-n",
+				"start_all.sh"
+			]
+		}
+	]
+}

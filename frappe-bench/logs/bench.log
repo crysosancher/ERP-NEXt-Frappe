@@ -65,3 +65,49 @@
 2026-07-15 01:45:42,386 INFO /Users/crysosancher/.local/bin/bench worker
 2026-07-15 01:45:42,390 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
 2026-07-15 01:45:42,397 INFO /Users/crysosancher/.local/bin/bench schedule
+2026-07-17 11:23:53,432 INFO /Users/crysosancher/.local/bin/bench list-sites
+2026-07-19 13:15:27,546 INFO /Users/crysosancher/.local/bin/bench new-site tenant2.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-19 13:15:44,657 INFO /Users/crysosancher/.local/bin/bench --site tenant2.erp.local install-app erpnext
+2026-07-19 13:16:19,410 INFO /Users/crysosancher/.local/bin/bench --site tenant2.erp.local set-config host_name https://tenant2.erp.local
+2026-07-19 13:20:04,230 INFO /Users/crysosancher/.local/bin/bench start
+2026-07-19 13:20:04,497 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-19 13:20:04,498 INFO /Users/crysosancher/.local/bin/bench worker
+2026-07-19 13:20:04,499 INFO /Users/crysosancher/.local/bin/bench schedule
+2026-07-19 13:20:04,506 INFO /Users/crysosancher/.local/bin/bench watch
+2026-07-19 13:47:40,153 INFO /Users/crysosancher/.local/bin/bench --site tenant2.erp.local set-config host_name http://tenant2.erp.local:8000
+2026-07-19 13:49:32,067 INFO /Users/crysosancher/.local/bin/bench --site tenant2.erp.local show-config
+2026-07-19 13:50:25,685 INFO /Users/crysosancher/.local/bin/bench --site tenant2.erp.local show-config
+2026-07-19 14:04:17,285 INFO /Users/crysosancher/.local/bin/bench --help
+2026-07-19 14:06:06,523 INFO /Users/crysosancher/.local/bin/bench new-app --help
+2026-07-19 14:06:06,842 INFO A newer version of bench is available: 5.29.1 → 5.31.0
+2026-07-19 14:06:28,220 INFO /Users/crysosancher/.local/bin/bench new-app saas_control --no-git
+2026-07-19 14:06:28,222 LOG creating new app saas_control
+2026-07-19 14:07:21,582 INFO /Users/crysosancher/.local/bin/bench new-app saas_control --no-git
+2026-07-19 14:07:21,585 LOG creating new app saas_control
+2026-07-19 14:07:54,685 LOG Installing saas_control
+2026-07-19 14:07:54,686 DEBUG cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && uv pip install --quiet --upgrade -e /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/apps/saas_control  --python /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/python
+2026-07-19 14:07:55,800 DEBUG bench build --app saas_control
+2026-07-19 14:07:55,933 INFO /Users/crysosancher/.local/bin/bench build --app saas_control
+2026-07-19 14:07:59,073 INFO A newer version of bench is available: 5.29.1 → 5.31.0
+2026-07-19 14:09:38,305 INFO /Users/crysosancher/.local/bin/bench pip install -e apps/saas_control
+2026-07-19 14:09:38,724 INFO /Users/crysosancher/.local/bin/bench --site erp.local install-app saas_control
+2026-07-19 14:10:46,421 INFO /Users/crysosancher/.local/bin/bench --site erp.local execute saas_control.saas_control.api.resolve_tenant --kwargs {"email":"owner1@example.com"}
+2026-07-19 14:11:00,635 INFO /Users/crysosancher/.local/bin/bench --site erp.local execute saas_control.saas_control.api.create_or_login --kwargs {"email":"owner1@example.com","full_name":"Owner One","company_slug":"tenant3","password":"admin"}
+2026-07-19 14:11:44,382 INFO /Users/crysosancher/.local/bin/bench --site erp.local execute saas_control.saas_control.api.create_or_login --kwargs {"email":"owner1@example.com","full_name":"Owner One","company_slug":"tenant3","password":"admin"}
+2026-07-19 14:11:45,006 INFO /Users/crysosancher/.local/bin/bench new-site tenant3.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-19 14:12:00,966 INFO /Users/crysosancher/.local/bin/bench --site tenant3.erp.local install-app erpnext
+2026-07-19 14:12:33,013 INFO /Users/crysosancher/.local/bin/bench --site erp.local execute saas_control.saas_control.api.resolve_tenant --kwargs {"email":"owner1@example.com"}
+2026-07-19 14:12:36,491 INFO /Users/crysosancher/.local/bin/bench --site tenant3.erp.local set-config host_name https://tenant3.erp.local
+2026-07-19 14:13:00,437 INFO /Users/crysosancher/.local/bin/bench --site erp.local execute saas_control.saas_control.api.create_or_login --kwargs {"email":"owner2@example.com","full_name":"Owner Two","company_slug":"tenant4","password":"admin"}
+2026-07-19 14:13:01,005 INFO /Users/crysosancher/.local/bin/bench new-site tenant4.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-19 14:13:18,131 INFO /Users/crysosancher/.local/bin/bench --site tenant4.erp.local install-app erpnext
+2026-07-19 14:13:47,239 INFO /Users/crysosancher/.local/bin/bench --site erp.local execute saas_control.saas_control.api.create_or_login --kwargs {"email":"owner2@example.com"}
+2026-07-19 17:20:38,843 INFO /Users/crysosancher/.local/bin/bench new-site tenant5.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin
+2026-07-19 17:20:55,028 INFO /Users/crysosancher/.local/bin/bench --site tenant5.erp.local install-app erpnext
+2026-07-19 17:21:29,955 INFO /Users/crysosancher/.local/bin/bench --site tenant5.erp.local set-config host_name https://tenant5.erp.local
+2026-07-20 00:44:15,702 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-20 01:52:12,886 INFO /Users/crysosancher/.local/bin/bench serve --port 8000
+2026-07-20 01:53:55,376 INFO /Users/crysosancher/.local/bin/bench new-site crysomedia.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password 123456789
+2026-07-20 01:54:11,556 INFO /Users/crysosancher/.local/bin/bench --site crysomedia.erp.local install-app erpnext
+2026-07-20 01:54:49,501 INFO /Users/crysosancher/.local/bin/bench --site crysomedia.erp.local set-config host_name https://crysomedia.erp.local
+2026-07-20 02:08:49,629 INFO /Users/crysosancher/.local/bin/bench serve --port 8000

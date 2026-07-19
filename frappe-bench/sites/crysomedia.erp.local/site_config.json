@@ -1,0 +1,8 @@
+{
+ "db_host": "127.0.0.1",
+ "db_name": "_101cd9eca4a3b5df",
+ "db_password": "Hqkf7pbofsJH0VkZ",
+ "db_port": 3307,
+ "db_type": "mariadb",
+ "host_name": "https://crysomedia.erp.local"
+}

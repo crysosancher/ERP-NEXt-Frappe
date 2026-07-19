@@ -1,0 +1,47 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<link rel="stylesheet" href="/assets/saas_control/css/saas_portal.css">
+
+<div class="saas-shell">
+  <section class="saas-card">
+    <header class="saas-hero">
+      <h1>Launch Your ERP Tenant</h1>
+      <p>Use your work email. Existing owners are redirected to their tenant login.</p>
+    </header>
+
+    <form class="saas-form" autocomplete="off">
+      <div class="field">
+        <label for="email">Work Email</label>
+        <input id="email" type="email" placeholder="founder@yourcompany.com" required>
+      </div>
+
+      <div id="signup-fields" class="hidden">
+        <div class="field">
+          <label for="full_name">Full Name</label>
+          <input id="full_name" type="text" placeholder="Jane Doe">
+        </div>
+
+        <div class="field">
+          <label for="company_slug">Company Slug</label>
+          <input id="company_slug" type="text" placeholder="acme">
+        </div>
+
+        <div class="field">
+          <label for="password">Admin Password</label>
+          <input id="password" type="password" placeholder="At least 8 characters">
+        </div>
+      </div>
+
+      <div id="saas-notice" class="notice hidden"></div>
+
+      <div class="actions">
+        <button id="continue-btn" class="btn btn-primary" type="button">Continue</button>
+        <button id="create-btn" class="btn btn-secondary hidden" type="button">Create Tenant</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<script src="/assets/saas_control/js/saas_portal.js"></script>
+{% endblock %}
