@@ -4,6 +4,33 @@ This guide documents:
 - How to set up ERPNext local development on a new system
 - Fixes required for the hybrid setup used here (Docker for MariaDB/Redis, host for Bench/Frappe)
 
+## 0. Fresh Clone Quick Start (Team)
+
+From a fresh clone, the fastest path is:
+
+```bash
+cd /Users/<you>/.../ERP-NEXT
+chmod +x team_setup.sh start_all.sh stop_all.sh
+./team_setup.sh
+./start_all.sh web
+```
+
+Open:
+
+- `http://localhost:8000/saas`
+- `http://crysomedia.127.0.0.1.nip.io:8000/saas`
+
+Stop everything:
+
+```bash
+./stop_all.sh
+```
+
+Notes:
+
+- `team_setup.sh` auto-creates `.env` from `.env.example` if missing.
+- Edit `.env` only when you need different DB/domain values.
+
 ## 1. Architecture Used
 
 - Host machine:

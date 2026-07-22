@@ -4,9 +4,17 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCH_DIR="$ROOT_DIR/frappe-bench"
 SITES_DIR="$BENCH_DIR/sites"
+ENV_FILE="$ROOT_DIR/.env"
 
 MODE="${1:-web}"                # web | full
-SITE_NAME="${2:-crysomedia.erp.local}"
+ARG_SITE_NAME="${2:-}"
+
+if [[ -f "$ENV_FILE" ]]; then
+  # shellcheck disable=SC1090
+  source "$ENV_FILE"
+fi
+
+SITE_NAME="${ARG_SITE_NAME:-${SITE_NAME:-crysomedia.erp.local}}"
 SITE_PREFIX="${SITE_NAME%%.*}"
 ALIAS_HOST="${SITE_PREFIX}.127.0.0.1.nip.io"
 
@@ -18,6 +26,11 @@ fi
 if [[ ! -f "$ROOT_DIR/docker-compose.yml" ]]; then
   echo "[ERROR] docker-compose.yml not found at: $ROOT_DIR/docker-compose.yml"
   exit 1
+fi
+
+if [[ -x "$ROOT_DIR/team_setup.sh" ]]; then
+	echo "[0/3] Applying team setup defaults..."
+	"$ROOT_DIR/team_setup.sh" >/dev/null
 fi
 
 echo "[1/3] Starting infrastructure containers (MariaDB + Redis)..."
