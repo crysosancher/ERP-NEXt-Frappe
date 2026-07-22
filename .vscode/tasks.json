@@ -380,6 +380,123 @@
 				"-n",
 				"start_all.sh"
 			]
+		},
+		{
+			"label": "git-status-root",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"-sb"
+			]
+		},
+		{
+			"label": "git-status-frappe-app",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git status -sb"
+			]
+		},
+		{
+			"label": "git-status-frappe-bench",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && git status -sb"
+			]
+		},
+		{
+			"label": "git-status-saas-control",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/saas_control && git status -sb"
+			]
+		},
+		{
+			"label": "git-remotes-saas-control",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/saas_control && git remote -v"
+			]
+		},
+		{
+			"label": "chmod-team-script",
+			"type": "shell",
+			"command": "chmod",
+			"args": [
+				"+x",
+				"team_setup.sh",
+				"start_all.sh",
+				"stop_all.sh"
+			]
+		},
+		{
+			"label": "lint-shell-scripts",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"sh -n team_setup.sh && sh -n start_all.sh && sh -n stop_all.sh"
+			]
+		},
+		{
+			"label": "git-status-after-bootstrap",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"-sb"
+			]
+		},
+		{
+			"label": "git-add-bootstrap-files",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"add",
+				"readme.md",
+				"start_all.sh",
+				"team_setup.sh",
+				".env.example",
+				".gitignore",
+				"stop_all.sh"
+			]
+		},
+		{
+			"label": "git-commit-bootstrap",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"commit",
+				"-m",
+				"Add team bootstrap scripts and zero-config startup flow"
+			]
+		},
+		{
+			"label": "git-push-master",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"origin",
+				"master"
+			]
+		},
+		{
+			"label": "git-status-after-push",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"-sb"
+			]
 		}
 	]
 }
