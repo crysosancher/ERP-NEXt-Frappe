@@ -1,1 +1,24 @@
 .env
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Bench runtime logs
+frappe-bench/logs/*.log
+frappe-bench/logs/*.log.*
+frappe-bench/logs/cssutils.log
+frappe-bench/logs/render-template.log
+
+# Per-site runtime artifacts
+frappe-bench/sites/*/logs/
+frappe-bench/sites/*/.test_log
+frappe-bench/sites/*/locks/
+frappe-bench/sites/*/touched_tables.json
+
+# Local backups/archives generated during site cleanup
+frappe-bench/archived/sites/
+
+# Local virtualenv backups
+frappe-bench/env_backup_*/
+frappe-bench/env_py311_backup_*/

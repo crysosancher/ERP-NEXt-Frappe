@@ -15,6 +15,13 @@ chmod +x team_setup.sh start_all.sh stop_all.sh
 ./start_all.sh web
 ```
 
+If you ever get stuck with interactive site/database prompts, run the non-interactive reset (uses values from `.env`):
+
+```bash
+chmod +x reset_central_site.sh
+./reset_central_site.sh
+```
+
 Open:
 
 - `http://localhost:8000/saas`
@@ -34,7 +41,7 @@ Notes:
 ## 1. Architecture Used
 
 - Host machine:
-  - Python 3.11
+  - Python 3.14
   - Node.js 18
   - Yarn
   - Bench CLI
@@ -51,15 +58,15 @@ Install these on macOS host:
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install git python@3.11 node@18 yarn
-python3.11 -m pip install --upgrade pip
-python3.11 -m pip install --user frappe-bench
+brew install git python@3.14 node@18 yarn
+python3.14 -m pip install --upgrade pip
+python3.14 -m pip install --user frappe-bench
 ```
 
 If `bench` is not found, add this to your shell profile:
 
 ```bash
-export PATH="$HOME/Library/Python/3.11/bin:$PATH"
+export PATH="$HOME/Library/Python/3.14/bin:$PATH"
 ```
 
 Then reload shell.
@@ -120,7 +127,7 @@ docker compose ps
 ## 4. Bench + Site Setup
 
 ```bash
-bench init frappe-bench --frappe-branch version-15 --python /opt/homebrew/bin/python3.11
+bench init frappe-bench --frappe-branch version-16 --python /opt/homebrew/bin/python3.14
 cd frappe-bench
 ```
 
@@ -146,7 +153,7 @@ bench set-config -g redis_socketio redis://127.0.0.1:12000
 Install ERPNext and enable dev mode:
 
 ```bash
-bench get-app --branch version-15 erpnext
+bench get-app --branch version-16 erpnext
 bench --site erp.local install-app erpnext
 bench --site erp.local set-config developer_mode 1
 bench --site erp.local clear-cache
@@ -450,3 +457,59 @@ Set these in `sites/common_site_config.json` if needed:
 - `saas_db_root_password` (default: `root`)
 - `saas_db_container` (default: `erp-mariadb`)
 - `saas_erp_app` (default: `erpnext`)
+
+## 11. SaaS Quick Start (Dev Team)
+
+This section is the fastest way for any teammate to clone and run the SaaS onboarding flow.
+
+### 11.1 One-time setup after clone
+
+From repo root:
+
+```bash
+chmod +x team_setup.sh start_all.sh stop_all.sh
+./team_setup.sh
+```
+
+What this does:
+
+1. Creates `.env` from `.env.example` (if missing).
+2. Applies shared bench config for multitenancy.
+3. Applies SaaS DB provisioning config.
+4. Creates local `nip.io` alias for the central site.
+
+### 11.2 Start the app
+
+From repo root:
+
+```bash
+./start_all.sh web
+```
+
+Open SaaS page:
+
+- `http://localhost:8000/saas`
+- `http://crysomedia.127.0.0.1.nip.io:8000/saas`
+
+### 11.3 Create tenant via UI
+
+1. Enter email and click **Continue**.
+2. If user is new, fill Full Name, Company Slug, Password.
+3. Click **Create Tenant**.
+4. Wait for provisioning to complete (loader is shown during creation).
+5. You will be redirected to tenant login URL automatically.
+
+### 11.4 Stop everything
+
+```bash
+./stop_all.sh
+```
+
+### 11.5 Common issues
+
+1. **ERR_NAME_NOT_RESOLVED on `*.erp.local`**
+  Use the `nip.io` URL returned by the API/UI (`*.127.0.0.1.nip.io`) for local runs.
+2. **Port 8000 not reachable**
+  Start again with `./start_all.sh web`.
+3. **Docker services not up**
+  Run `docker compose ps` and ensure MariaDB + Redis are `Up`.

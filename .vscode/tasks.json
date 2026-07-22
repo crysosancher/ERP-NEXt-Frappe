@@ -497,6 +497,992 @@
 				"status",
 				"-sb"
 			]
+		},
+		{
+			"label": "check-frappe-erpnext-versions",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch --show-current && cd ../erpnext && git branch --show-current"
+			]
+		},
+		{
+			"label": "list-current-sites",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && bench list-sites"
+			]
+		},
+		{
+			"label": "check-app-branches",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch --show-current && cd ../erpnext && git branch --show-current && cd ../saas_control && git branch --show-current"
+			]
+		},
+		{
+			"label": "git-status-root-before-migration",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"-sb"
+			]
+		},
+		{
+			"label": "enumerate-site-directories",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && for d in */; do n=${d%/}; case \"$n\" in assets|archived|pids) ;; *) if [ -f \"$n/site_config.json\" ]; then echo \"$n\"; fi ;; esac; done"
+			]
+		},
+		{
+			"label": "drop-all-real-sites",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && for s in crysomedia.erp.local erp.local qwerty.erp.local tenant2.erp.local tenant3.erp.local tenant4.erp.local tenant5.erp.local thoughtbins.erp.local; do echo \"Dropping $s\"; bench drop-site \"$s\" --force --root-login root --root-password root || true; done"
+			]
+		},
+		{
+			"label": "remove-nipio-alias-sites",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && find . -maxdepth 1 -type l -name '*.nip.io' -print -delete"
+			]
+		},
+		{
+			"label": "verify-no-active-sites",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && for d in */; do n=${d%/}; if [ -f \"$n/site_config.json\" ]; then echo \"$n\"; fi; done"
+			]
+		},
+		{
+			"label": "remove-nipio-alias-sites-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/sites && find . -maxdepth 1 -type l -name \"*.nip.io\" -print -delete"
+			]
+		},
+		{
+			"label": "switch-frappe-to-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git fetch upstream --prune && git checkout version-16 && git pull --ff-only upstream version-16"
+			]
+		},
+		{
+			"label": "switch-erpnext-to-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git fetch upstream --prune && git checkout version-16 && git pull --ff-only upstream version-16"
+			]
+		},
+		{
+			"label": "check-frappe-branch-post-switch",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch --show-current && git rev-parse --short HEAD"
+			]
+		},
+		{
+			"label": "check-erpnext-branch-post-switch",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch --show-current && git rev-parse --short HEAD"
+			]
+		},
+		{
+			"label": "check-frappe-v16-availability",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch -a | rg 'version-16' || true"
+			]
+		},
+		{
+			"label": "check-erpnext-v16-availability",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch -a | rg 'version-16' || true"
+			]
+		},
+		{
+			"label": "check-frappe-v16-availability-grep",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch -a | grep 'version-16' || true"
+			]
+		},
+		{
+			"label": "check-erpnext-v16-availability-grep",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch -a | grep 'version-16' || true"
+			]
+		},
+		{
+			"label": "list-frappe-version-branches",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch -r | grep 'version-' | tail -n 20"
+			]
+		},
+		{
+			"label": "list-erpnext-version-branches",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch -r | grep 'version-' | tail -n 20"
+			]
+		},
+		{
+			"label": "frappe-remotes",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git remote -v"
+			]
+		},
+		{
+			"label": "erpnext-remotes",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git remote -v"
+			]
+		},
+		{
+			"label": "frappe-ls-remote-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git ls-remote --heads upstream | grep 'version-16\\|refs/heads/develop' || true"
+			]
+		},
+		{
+			"label": "erpnext-ls-remote-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git ls-remote --heads upstream | grep 'version-16\\|refs/heads/develop' || true"
+			]
+		},
+		{
+			"label": "frappe-ls-remote-v16-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git ls-remote --heads upstream | grep -E \"version-16|refs/heads/develop\" || true"
+			]
+		},
+		{
+			"label": "erpnext-ls-remote-v16-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git ls-remote --heads upstream | grep -E \"version-16|refs/heads/develop\" || true"
+			]
+		},
+		{
+			"label": "frappe-fetch-refspec",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "erpnext-fetch-refspec",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "check-sites-after-cleanup",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"ls -1 frappe-bench/sites"
+			]
+		},
+		{
+			"label": "check-frappe-branch-state",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch --show-current && git status -sb"
+			]
+		},
+		{
+			"label": "check-erpnext-branch-state",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch --show-current && git status -sb"
+			]
+		},
+		{
+			"label": "check-frappe-v16-remote-head",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git ls-remote --heads upstream 'version-16*'"
+			]
+		},
+		{
+			"label": "check-erpnext-v16-remote-head",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git ls-remote --heads upstream 'version-16*'"
+			]
+		},
+		{
+			"label": "check-frappe-v16-remote-head-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git ls-remote --heads upstream \"version-16*\""
+			]
+		},
+		{
+			"label": "check-erpnext-v16-remote-head-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git ls-remote --heads upstream \"version-16*\""
+			]
+		},
+		{
+			"label": "upgrade-frappe-to-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git fetch upstream --prune && git checkout version-16 && git pull --ff-only upstream version-16"
+			]
+		},
+		{
+			"label": "upgrade-erpnext-to-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git fetch upstream --prune && git checkout version-16 && git pull --ff-only upstream version-16"
+			]
+		},
+		{
+			"label": "checkout-frappe-v16-track",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git checkout -b version-16 --track upstream/version-16"
+			]
+		},
+		{
+			"label": "checkout-erpnext-v16-track",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git checkout -b version-16 --track upstream/version-16"
+			]
+		},
+		{
+			"label": "inspect-frappe-remote-fetchspec",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git remote -v && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "inspect-erpnext-remote-fetchspec",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git remote -v && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "inspect-frappe-fetchspec-no-pager",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && GIT_PAGER=cat git remote -v && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "inspect-erpnext-fetchspec-no-pager",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && GIT_PAGER=cat git remote -v && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "migrate-frappe-branch-to-v16-task",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git status -sb && git config --replace-all remote.upstream.fetch '+refs/heads/*:refs/remotes/upstream/*' && git fetch upstream --prune && (git checkout version-16 || git checkout -b version-16 --track upstream/version-16) && git pull --ff-only upstream version-16 && git status -sb"
+			]
+		},
+		{
+			"label": "migrate-erpnext-branch-to-v16-task",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git status -sb && git config --replace-all remote.upstream.fetch '+refs/heads/*:refs/remotes/upstream/*' && git fetch upstream --prune && (git checkout version-16 || git checkout -b version-16 --track upstream/version-16) && git pull --ff-only upstream version-16 && git status -sb"
+			]
+		},
+		{
+			"label": "migrate-frappe-v16-escaped-refspec",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git status -sb && git config --replace-all remote.upstream.fetch +refs/heads/\\*:refs/remotes/upstream/\\* && git fetch upstream --prune && (git checkout version-16 || git checkout -b version-16 --track upstream/version-16) && git pull --ff-only upstream version-16 && git status -sb"
+			]
+		},
+		{
+			"label": "migrate-erpnext-v16-escaped-refspec",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git status -sb && git config --replace-all remote.upstream.fetch +refs/heads/\\*:refs/remotes/upstream/\\* && git fetch upstream --prune && (git checkout version-16 || git checkout -b version-16 --track upstream/version-16) && git pull --ff-only upstream version-16 && git status -sb"
+			]
+		},
+		{
+			"label": "inspect-frappe-migration-result-file",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"FILE='/Users/crysosancher/Library/Application Support/Code/User/workspaceStorage/6435ac3b6436608b6fcd59767400e2b6/GitHub.copilot-chat/chat-session-resources/4e3e2c9a-b08e-41d9-9dcf-aac81ba26485/call_qYgAgUr9Qbu0g1dAxF4fenJ3__vscode-1784444811084/content.txt'; wc -l \"$FILE\"; rg -n \"Switched to|Already on|branch 'version-16'|## version-16|error|fatal\" \"$FILE\" | head -n 40"
+			]
+		},
+		{
+			"label": "inspect-frappe-migration-result-file-2",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"FILE=\"/Users/crysosancher/Library/Application Support/Code/User/workspaceStorage/6435ac3b6436608b6fcd59767400e2b6/GitHub.copilot-chat/chat-session-resources/4e3e2c9a-b08e-41d9-9dcf-aac81ba26485/call_qYgAgUr9Qbu0g1dAxF4fenJ3__vscode-1784444811084/content.txt\"; wc -l \"$FILE\"; rg -n \"Switched to|Already on|branch version-16|## version-16|error|fatal\" \"$FILE\" | head -n 40"
+			]
+		},
+		{
+			"label": "inspect-frappe-migration-result-file-3",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"FILE=\"/Users/crysosancher/Library/Application Support/Code/User/workspaceStorage/6435ac3b6436608b6fcd59767400e2b6/GitHub.copilot-chat/chat-session-resources/4e3e2c9a-b08e-41d9-9dcf-aac81ba26485/call_qYgAgUr9Qbu0g1dAxF4fenJ3__vscode-1784444811084/content.txt\"; grep -nE \"Switched to|Already on|version-16|error|fatal|## \" \"$FILE\" | tail -n 40"
+			]
+		},
+		{
+			"label": "check-frappe-current-branch",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && git branch --show-current && git status -sb | head -n 5"
+			]
+		},
+		{
+			"label": "check-erpnext-current-branch",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch --show-current && git status -sb | head -n 5"
+			]
+		},
+		{
+			"label": "migrate-erpnext-to-v16-complete",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git config --replace-all remote.upstream.fetch +refs/heads/\\*:refs/remotes/upstream/\\* && git fetch upstream --prune && (git checkout version-16 || git checkout -b version-16 --track upstream/version-16) && git pull --ff-only upstream version-16 && git branch --show-current && git status -sb | head -n 5"
+			]
+		},
+		{
+			"label": "check-erpnext-branch-after-long-fetch",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext && git branch --show-current && git status -sb | head -n 5 && git config --get-all remote.upstream.fetch"
+			]
+		},
+		{
+			"label": "sanity-frappe-branch-now",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe; echo BRANCH=$(git rev-parse --abbrev-ref HEAD); git status -sb | sed -n '1,2p'"
+			]
+		},
+		{
+			"label": "sanity-erpnext-branch-now",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/erpnext; echo BRANCH=$(git rev-parse --abbrev-ref HEAD); git status -sb | sed -n '1,2p'"
+			]
+		},
+		{
+			"label": "verify-sites-and-apps",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && echo 'SITES:' && ls -1 sites && echo 'APPS:' && ls -1 apps"
+			]
+		},
+		{
+			"label": "verify-app-branches-clean",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench/apps/frappe && echo FRAPPE_BRANCH=$(git branch --show-current) && git status -sb | sed -n '1,3p'; cd ../erpnext && echo ERPNEXT_BRANCH=$(git branch --show-current) && git status -sb | sed -n '1,3p'; cd ../saas_control && echo SAAS_BRANCH=$(git branch --show-current) && git status -sb | sed -n '1,5p'"
+			]
+		},
+		{
+			"label": "verify-root-git-state",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status -sb | sed -n '1,40p'"
+			]
+		},
+		{
+			"label": "verify-bench-version-after-upgrade",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && bench version"
+			]
+		},
+		{
+			"label": "check-python-runtimes",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"python3 --version; command -v python3.12 >/dev/null 2>&1 && python3.12 --version || echo 'python3.12-not-found'; command -v brew >/dev/null 2>&1 && brew --version | head -n 1 || echo 'brew-not-found'"
+			]
+		},
+		{
+			"label": "install-python-312-homebrew",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"brew list --versions python@3.12 >/dev/null 2>&1 || brew install python@3.12; brew list --versions python@3.12; /opt/homebrew/bin/python3.12 --version"
+			]
+		},
+		{
+			"label": "rebuild-bench-env-python312",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && TS=$(date +%Y%m%d_%H%M%S) && if [ -d env ]; then mv env \"env_py311_backup_${TS}\"; fi && /opt/homebrew/bin/python3.12 -m venv env && ./env/bin/python -V && ./env/bin/pip install --upgrade pip setuptools wheel && ./env/bin/pip install -e apps/frappe -e apps/erpnext -e apps/saas_control"
+			]
+		},
+		{
+			"label": "check-install-python314",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"brew info python@3.14 >/dev/null 2>&1 && echo 'python314_formula=yes' || echo 'python314_formula=no'; brew list --versions python@3.14 >/dev/null 2>&1 || brew install python@3.14; brew list --versions python@3.14; /opt/homebrew/bin/python3.14 --version"
+			]
+		},
+		{
+			"label": "rebuild-bench-env-python314",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && TS=$(date +%Y%m%d_%H%M%S) && if [ -d env ]; then mv env \"env_backup_${TS}\"; fi && /opt/homebrew/bin/python3.14 -m venv env && ./env/bin/python -V && ./env/bin/pip install --upgrade pip setuptools wheel && ./env/bin/pip install -e apps/frappe -e apps/erpnext -e apps/saas_control"
+			]
+		},
+		{
+			"label": "check-bench-env-install-success",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"FILE=\"/Users/crysosancher/Library/Application Support/Code/User/workspaceStorage/6435ac3b6436608b6fcd59767400e2b6/GitHub.copilot-chat/chat-session-resources/4e3e2c9a-b08e-41d9-9dcf-aac81ba26485/call_TYhfeeaIry7jd6Zu6JREJYwU__vscode-1784444811106/content.txt\"; grep -nE \"Successfully installed|ERROR:|Python [0-9]|Installing collected packages|Successfully built\" \"$FILE\" | tail -n 60"
+			]
+		},
+		{
+			"label": "verify-bench-version-python314",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && ./env/bin/bench version"
+			]
+		},
+		{
+			"label": "install-bench-cli-in-env",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && ./env/bin/pip install frappe-bench && ./env/bin/bench --version"
+			]
+		},
+		{
+			"label": "restore-click-for-frappe-and-test-bench",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && ./env/bin/pip install 'click~=8.3.1' && ./env/bin/bench --version && ./env/bin/bench version"
+			]
+		},
+		{
+			"label": "validate-script-syntax",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"bash -n start_all.sh && bash -n team_setup.sh && echo OK"
+			]
+		},
+		{
+			"label": "recreate-central-site-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && docker compose up -d && cd frappe-bench && ./env/bin/bench new-site crysomedia.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin --no-mariadb-socket"
+			]
+		},
+		{
+			"label": "install-erpnext-and-saas-apps-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && ./env/bin/bench --site crysomedia.erp.local install-app erpnext && ./env/bin/bench --site crysomedia.erp.local install-app saas_control && ./env/bin/bench --site crysomedia.erp.local migrate"
+			]
+		},
+		{
+			"label": "apply-team-setup-after-v16-migration",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && chmod +x team_setup.sh && ./team_setup.sh"
+			]
+		},
+		{
+			"label": "smoke-test-saas-route-v16",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -o /tmp/saas_v16.html -w '%{http_code}\\n' http://127.0.0.1:8000/saas && wc -c /tmp/saas_v16.html && head -n 5 /tmp/saas_v16.html"
+			]
+		},
+		{
+			"label": "smoke-test-saas-api-resolve",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -X POST -H 'Content-Type: application/json' --data '{\"email\":\"demo@example.com\"}' http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant | head -c 400; echo"
+			]
+		},
+		{
+			"label": "smoke-test-saas-api-resolve-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -X POST -H \"Content-Type: application/json\" --data '{\"email\":\"demo@example.com\"}' \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\" | head -c 500; echo"
+			]
+		},
+		{
+			"label": "smoke-test-saas-api-resolve-form",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -X POST --data-urlencode \"email=demo@example.com\" \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\" | head -c 500; echo"
+			]
+		},
+		{
+			"label": "final-version-and-site-check",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd frappe-bench && echo 'frappe:' $(git -C apps/frappe rev-parse --abbrev-ref HEAD) && echo 'erpnext:' $(git -C apps/erpnext rev-parse --abbrev-ref HEAD) && ./env/bin/bench version && ls -1 sites"
+			]
+		},
+		{
+			"label": "final-git-status-short",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status --short | sed -n '1,80p'"
+			]
+		},
+		{
+			"label": "audit-readme-leftovers",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && grep -nE 'version-15|python3\\.11|Python 3\\.11|bench init .*version-15|get-app .*version-15' readme.md || true"
+			]
+		},
+		{
+			"label": "quick-runtime-audit",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && ./env/bin/bench version && ls -1 sites && ./env/bin/python -V"
+			]
+		},
+		{
+			"label": "audit-readme-leftovers-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && grep -nE \"version-15|python3\\.11|Python 3\\.11|bench init .*version-15|get-app .*version-15\" readme.md || true"
+			]
+		},
+		{
+			"label": "smoke-saas-availability",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -o /tmp/saas_check.html -w '%{http_code}\\n' http://127.0.0.1:8000/saas; wc -c /tmp/saas_check.html | awk '{print $1}'"
+			]
+		},
+		{
+			"label": "smoke-saas-availability-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -o /tmp/saas_check.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas; wc -c /tmp/saas_check.html"
+			]
+		},
+		{
+			"label": "smoke-saas-api-resolve-final",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -X POST --data-urlencode \"email=demo@example.com\" \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\""
+			]
+		},
+		{
+			"label": "audit-git-status-porcelain",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status --short | sed -n '1,220p'"
+			]
+		},
+		{
+			"label": "scan-todo-markers",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=env -E 'TODO|FIXME|TBD' . | head -n 120"
+			]
+		},
+		{
+			"label": "scan-todo-markers-fixed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=env -E \"TODO|FIXME|TBD\" . | head -n 120"
+			]
+		},
+		{
+			"label": "cleanup-runtime-artifacts",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git restore --worktree -- frappe-bench/logs frappe-bench/sites/crysomedia.erp.local/logs frappe-bench/sites/crysomedia.erp.local/.test_log frappe-bench/apps/saas_control/saas_control/saas_control/__pycache__/api.cpython-314.pyc && find frappe-bench/apps/saas_control -type d -name __pycache__ -prune -exec rm -rf {} + && rm -rf frappe-bench/archived/sites frappe-bench/env_backup_* frappe-bench/env_py311_backup_* && rm -f frappe-bench/logs/cssutils.log frappe-bench/logs/render-template.log frappe-bench/sites/crysomedia.erp.local/logs/cssutils.log frappe-bench/sites/crysomedia.erp.local/logs/render-template.log frappe-bench/sites/crysomedia.erp.local/touched_tables.json"
+			]
+		},
+		{
+			"label": "status-after-cleanup",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status --short | sed -n '1,220p'"
+			]
+		},
+		{
+			"label": "restore-nonintentional-tracked-files",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git restore --worktree -- frappe-bench/sites/crysomedia.erp.local/site_config.json frappe-bench/archived/sites/erp.local"
+			]
+		},
+		{
+			"label": "final-status-intent-check",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status --short | sed -n '1,220p'"
+			]
+		},
+		{
+			"label": "final-runtime-smoke",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && ./env/bin/bench version && curl -s -o /tmp/saas_final.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas"
+			]
+		},
+		{
+			"label": "diagnose-site-500",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && ./env/bin/bench --site crysomedia.erp.local migrate 2>&1 | tail -n 80"
+			]
+		},
+		{
+			"label": "fix-db-user-grants-central-site",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"DB_NAME=$(ruby -rjson -e 'j=JSON.parse(File.read(\"frappe-bench/sites/crysomedia.erp.local/site_config.json\")); puts j[\"db_name\"]'); DB_PASS=$(ruby -rjson -e 'j=JSON.parse(File.read(\"frappe-bench/sites/crysomedia.erp.local/site_config.json\")); puts j[\"db_password\"]'); cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && mysql -h 127.0.0.1 -P 3307 -u root -proot -e \"CREATE USER IF NOT EXISTS '${DB_NAME}'@'%' IDENTIFIED BY '${DB_PASS}'; CREATE USER IF NOT EXISTS '${DB_NAME}'@'172.21.0.1' IDENTIFIED BY '${DB_PASS}'; GRANT ALL PRIVILEGES ON \\\\`${DB_NAME}\\\\`.* TO '${DB_NAME}'@'%'; GRANT ALL PRIVILEGES ON \\\\`${DB_NAME}\\\\`.* TO '${DB_NAME}'@'172.21.0.1'; FLUSH PRIVILEGES;\""
+			]
+		},
+		{
+			"label": "fix-db-user-grants-central-site-2",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && CFG=frappe-bench/sites/crysomedia.erp.local/site_config.json && DB_NAME=$(sed -n 's/.*\"db_name\": \"\\([^\"]*\\)\".*/\\1/p' \"$CFG\") && DB_PASS=$(sed -n 's/.*\"db_password\": \"\\([^\"]*\\)\".*/\\1/p' \"$CFG\") && mysql -h 127.0.0.1 -P 3307 -u root -proot -e \"CREATE USER IF NOT EXISTS '${DB_NAME}'@'%' IDENTIFIED BY '${DB_PASS}'; CREATE USER IF NOT EXISTS '${DB_NAME}'@'172.21.0.1' IDENTIFIED BY '${DB_PASS}'; GRANT ALL PRIVILEGES ON \\\\`${DB_NAME}\\\\`.* TO '${DB_NAME}'@'%'; GRANT ALL PRIVILEGES ON \\\\`${DB_NAME}\\\\`.* TO '${DB_NAME}'@'172.21.0.1'; FLUSH PRIVILEGES;\""
+			]
+		},
+		{
+			"label": "fix-db-user-grants-direct",
+			"type": "shell",
+			"command": "mysql",
+			"args": [
+				"-h",
+				"127.0.0.1",
+				"-P",
+				"3307",
+				"-u",
+				"root",
+				"-proot",
+				"-e",
+				"CREATE USER IF NOT EXISTS '_101cd9eca4a3b5df'@'%' IDENTIFIED BY 'Hqkf7pbofsJH0VkZ'; CREATE USER IF NOT EXISTS '_101cd9eca4a3b5df'@'172.21.0.1' IDENTIFIED BY 'Hqkf7pbofsJH0VkZ'; GRANT ALL PRIVILEGES ON `_101cd9eca4a3b5df`.* TO '_101cd9eca4a3b5df'@'%'; GRANT ALL PRIVILEGES ON `_101cd9eca4a3b5df`.* TO '_101cd9eca4a3b5df'@'172.21.0.1'; FLUSH PRIVILEGES;"
+			]
+		},
+		{
+			"label": "fix-db-user-grants-heredoc",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cat <<'SQL' | mysql -h 127.0.0.1 -P 3307 -u root -proot\nCREATE USER IF NOT EXISTS '_101cd9eca4a3b5df'@'%' IDENTIFIED BY 'Hqkf7pbofsJH0VkZ';\nCREATE USER IF NOT EXISTS '_101cd9eca4a3b5df'@'172.21.0.1' IDENTIFIED BY 'Hqkf7pbofsJH0VkZ';\nGRANT ALL PRIVILEGES ON `_101cd9eca4a3b5df`.* TO '_101cd9eca4a3b5df'@'%';\nGRANT ALL PRIVILEGES ON `_101cd9eca4a3b5df`.* TO '_101cd9eca4a3b5df'@'172.21.0.1';\nFLUSH PRIVILEGES;\nSQL"
+			]
+		},
+		{
+			"label": "recreate-central-site-with-hostscope",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && ./env/bin/bench drop-site crysomedia.erp.local --force --no-backup && ./env/bin/bench new-site crysomedia.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin --mariadb-user-host-login-scope '%' && ./env/bin/bench --site crysomedia.erp.local install-app erpnext && ./env/bin/bench --site crysomedia.erp.local install-app saas_control && ./env/bin/bench --site crysomedia.erp.local migrate"
+			]
+		},
+		{
+			"label": "noninteractive-recreate-central-site",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && DB_NAME=$(sed -n 's/.*\"db_name\": \"\\([^\"]*\\)\".*/\\1/p' sites/crysomedia.erp.local/site_config.json) && mysql -h 127.0.0.1 -P 3307 -u root -proot -e \"DROP DATABASE IF EXISTS \\\\`${DB_NAME}\\\\`; DROP USER IF EXISTS '${DB_NAME}'@'%'; DROP USER IF EXISTS '${DB_NAME}'@'172.21.0.1';\" && rm -rf sites/crysomedia.erp.local sites/crysomedia.127.0.0.1.nip.io && ./env/bin/bench new-site crysomedia.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin --mariadb-user-host-login-scope '%' && ./env/bin/bench --site crysomedia.erp.local install-app erpnext && ./env/bin/bench --site crysomedia.erp.local install-app saas_control && ./env/bin/bench --site crysomedia.erp.local migrate && cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && ./team_setup.sh && curl -s -o /tmp/saas_final2.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas"
+			]
+		},
+		{
+			"label": "mysql-drop-central-db-user-doublequotes",
+			"type": "shell",
+			"command": "mysql",
+			"args": [
+				"-h",
+				"127.0.0.1",
+				"-P",
+				"3307",
+				"-u",
+				"root",
+				"-proot",
+				"-e",
+				"DROP DATABASE IF EXISTS `_101cd9eca4a3b5df`; DROP USER IF EXISTS \"_101cd9eca4a3b5df\"@\"%\"; DROP USER IF EXISTS \"_101cd9eca4a3b5df\"@\"172.21.0.1\"; FLUSH PRIVILEGES;"
+			]
+		},
+		{
+			"label": "recreate-central-site-noninteractive-v2",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench && rm -rf sites/crysomedia.erp.local sites/crysomedia.127.0.0.1.nip.io && ./env/bin/bench new-site crysomedia.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password admin --mariadb-user-host-login-scope=% && ./env/bin/bench --site crysomedia.erp.local install-app erpnext && ./env/bin/bench --site crysomedia.erp.local install-app saas_control && ./env/bin/bench --site crysomedia.erp.local migrate && cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && ./team_setup.sh"
+			]
+		},
+		{
+			"label": "final-saas-smoke-after-fix",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -o /tmp/saas_after_fix.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas && curl -s -X POST --data-urlencode \"email=demo@example.com\" \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\""
+			]
+		},
+		{
+			"label": "final-git-status-after-fix",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status --short | sed -n '1,220p'"
+			]
+		},
+		{
+			"label": "cleanup-logs-after-final-validation",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git restore --worktree -- frappe-bench/logs frappe-bench/sites/crysomedia.erp.local/logs frappe-bench/sites/crysomedia.erp.local/.test_log"
+			]
+		},
+		{
+			"label": "status-final-trimmed",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && git status --short | sed -n '1,220p'"
+			]
+		},
+		{
+			"label": "check-current-saas-health",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -o /tmp/saas_now.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas; curl -s -X POST --data-urlencode \"email=demo@example.com\" \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\""
+			]
+		},
+		{
+			"label": "validate-new-reset-script",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"cd /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT && chmod +x reset_central_site.sh && bash -n reset_central_site.sh && bash -n team_setup.sh && bash -n start_all.sh && echo OK"
+			]
+		},
+		{
+			"label": "verify-runtime-still-healthy",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"curl -s -o /tmp/saas_final_health.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas && curl -s -X POST --data-urlencode \"email=demo@example.com\" \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\""
+			]
 		}
 	]
 }

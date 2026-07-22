@@ -1,8 +1,13 @@
 {
  "db_host": "127.0.0.1",
- "db_name": "_101cd9eca4a3b5df",
- "db_password": "Hqkf7pbofsJH0VkZ",
+ "db_name": "_80557c070139fbba",
+ "db_password": "dLJRRZu1hO4UnSll",
  "db_port": 3307,
  "db_type": "mariadb",
- "host_name": "https://crysomedia.erp.local"
+ "db_user": "_80557c070139fbba",
+ "installed_apps": [
+  "frappe",
+  "erpnext",
+  "saas_control"
+ ]
 }

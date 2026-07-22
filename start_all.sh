@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCH_DIR="$ROOT_DIR/frappe-bench"
 SITES_DIR="$BENCH_DIR/sites"
 ENV_FILE="$ROOT_DIR/.env"
+BENCH_CMD="$BENCH_DIR/env/bin/bench"
 
 MODE="${1:-web}"                # web | full
 ARG_SITE_NAME="${2:-}"
@@ -25,6 +26,12 @@ fi
 
 if [[ ! -f "$ROOT_DIR/docker-compose.yml" ]]; then
   echo "[ERROR] docker-compose.yml not found at: $ROOT_DIR/docker-compose.yml"
+  exit 1
+fi
+
+if [[ ! -x "$BENCH_CMD" ]]; then
+  echo "[ERROR] Bench CLI not found at: $BENCH_CMD"
+  echo "Run environment setup first (team setup or dependency install)."
   exit 1
 fi
 
@@ -55,10 +62,10 @@ if [[ "$MODE" == "web" ]]; then
   echo "Serving web on:"
   echo "  - http://localhost:8000"
   echo "  - http://$ALIAS_HOST:8000"
-  exec bench serve --port 8000
+  exec "$BENCH_CMD" serve --port 8000
 elif [[ "$MODE" == "full" ]]; then
   echo "Starting full dev stack with bench start"
-  exec bench start
+  exec "$BENCH_CMD" start
 else
   echo "[ERROR] Invalid mode: $MODE"
   echo "Usage: ./start_all.sh [web|full] [site-name]"

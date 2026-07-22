@@ -5,9 +5,16 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCH_DIR="$ROOT_DIR/frappe-bench"
 ENV_FILE="$ROOT_DIR/.env"
 ENV_EXAMPLE="$ROOT_DIR/.env.example"
+BENCH_CMD="$BENCH_DIR/env/bin/bench"
 
 if [[ ! -d "$BENCH_DIR" ]]; then
   echo "[ERROR] Bench directory not found at: $BENCH_DIR"
+  exit 1
+fi
+
+if [[ ! -x "$BENCH_CMD" ]]; then
+  echo "[ERROR] Bench CLI not found at: $BENCH_CMD"
+  echo "Create/install bench environment first before running team setup."
   exit 1
 fi
 
@@ -37,22 +44,22 @@ source "$ENV_FILE"
 cd "$BENCH_DIR"
 
 echo "[1/3] Applying shared bench/global configuration..."
-bench set-config -g redis_cache redis://127.0.0.1:13000
-bench set-config -g redis_queue redis://127.0.0.1:11000
-bench set-config -g redis_socketio redis://127.0.0.1:12000
-bench set-config -g dns_multitenant true
-bench set-config -g serve_default_site false
-bench set-config -g default_site "$SITE_NAME"
+"$BENCH_CMD" set-config -g redis_cache redis://127.0.0.1:13000
+"$BENCH_CMD" set-config -g redis_queue redis://127.0.0.1:11000
+"$BENCH_CMD" set-config -g redis_socketio redis://127.0.0.1:12000
+"$BENCH_CMD" set-config -g dns_multitenant true
+"$BENCH_CMD" set-config -g serve_default_site false
+"$BENCH_CMD" set-config -g default_site "$SITE_NAME"
 
 echo "[2/3] Applying SaaS provisioning configuration..."
-bench set-config -g saas_db_host "$SAAS_DB_HOST"
-bench set-config -g saas_db_port "$SAAS_DB_PORT"
-bench set-config -g saas_db_root_user "$SAAS_DB_ROOT_USER"
-bench set-config -g saas_db_root_password "$SAAS_DB_ROOT_PASSWORD"
-bench set-config -g saas_db_container "$SAAS_DB_CONTAINER"
-bench set-config -g saas_erp_app "$SAAS_ERP_APP"
-bench set-config -g saas_base_domain "$SAAS_BASE_DOMAIN"
-bench set-config -g saas_redirect_mode "$SAAS_REDIRECT_MODE"
+"$BENCH_CMD" set-config -g saas_db_host "$SAAS_DB_HOST"
+"$BENCH_CMD" set-config -g saas_db_port "$SAAS_DB_PORT"
+"$BENCH_CMD" set-config -g saas_db_root_user "$SAAS_DB_ROOT_USER"
+"$BENCH_CMD" set-config -g saas_db_root_password "$SAAS_DB_ROOT_PASSWORD"
+"$BENCH_CMD" set-config -g saas_db_container "$SAAS_DB_CONTAINER"
+"$BENCH_CMD" set-config -g saas_erp_app "$SAAS_ERP_APP"
+"$BENCH_CMD" set-config -g saas_base_domain "$SAAS_BASE_DOMAIN"
+"$BENCH_CMD" set-config -g saas_redirect_mode "$SAAS_REDIRECT_MODE"
 
 echo "[3/3] Ensuring dev alias for the central site..."
 SITE_PREFIX="${SITE_NAME%%.*}"
