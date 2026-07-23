@@ -22,6 +22,13 @@ SKIP_DB_GRANT="${SKIP_DB_GRANT:-false}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCH_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
+# ─── Helpers ───────────────────────────────────────────────────────────────────
+json_value() {
+  local key="$1"
+  local file="$2"
+  sed -nE 's/^[[:space:]]*"'"${key}"'"[[:space:]]*:[[:space:]]*"?([^",}]+)"?[[:space:]]*,?[[:space:]]*$/\1/p' "$file" | head -n1
+}
+
 # Load remote DB config from common_site_config.json if present
 saas_db_host="$(json_value saas_db_host "${BENCH_ROOT}/sites/common_site_config.json")"
 saas_db_port="$(json_value saas_db_port "${BENCH_ROOT}/sites/common_site_config.json")"
@@ -67,12 +74,6 @@ if [[ -d "sites/${SITE_DOMAIN}" ]]; then
   exit 1
 fi
 
-json_value() {
-  local key="$1"
-  local file="$2"
-  sed -nE 's/^[[:space:]]*"'"${key}"'"[[:space:]]*:[[:space:]]*"?([^",}]+)"?[[:space:]]*,?[[:space:]]*$/\1/p' "$file" | head -n1
-}
-
 log_cmd() {
   # Run a command with output silenced; returns its exit code.
   # Output goes to a shared log file; errors are surfaced only on failure.
@@ -110,6 +111,19 @@ run_step "Running database setup & migrations" \
     --db-root-username "${DB_ROOT_USER}" \
     --db-root-password "${DB_ROOT_PASSWORD}" \
     --admin-password "${ADMIN_PASSWORD}"
+
+# bench new-site writes db_host/db_port to site_config.json based on what
+# it actually connected to (remote). But ensure it matches the remote settings
+# so install-app connects to the right DB.
+SITE_CONFIG_FILE="${BENCH_ROOT}/sites/${SITE_DOMAIN}/site_config.json"
+if [[ -f "${SITE_CONFIG_FILE}" ]]; then
+  _tmp=$(mktemp)
+  sed -E "s/(\"db_host\":[[:space:]]*)\"[^\"]*\"/\1\"${saas_db_host:-${DB_HOST}}\"/" \
+      "${SITE_CONFIG_FILE}" > "${_tmp}"
+  sed -E "s/(\"db_port\":[[:space:]]*)[0-9]+/\1${saas_db_port:-${DB_PORT}}/" \
+      "${_tmp}" > "${SITE_CONFIG_FILE}"
+  rm -f "${_tmp}"
+fi
 
 echo "▸ Installing ${ERP_APP}"
 run_step "Installing apps & running post-install hooks" \
