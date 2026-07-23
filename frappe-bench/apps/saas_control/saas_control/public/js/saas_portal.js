@@ -10,6 +10,70 @@
 		notice.classList.toggle("error", !!isError);
 	}
 
+	/* ─── Progress ring ─────────────────────────────────────────────────── */
+	var PROGRESS_RING_WRAP, RING_FILL;
+	var RING_CIRCUMFERENCE = 326.73;
+	var progressTimer = null;
+	var progressStep = -1;   // -1 = not started
+
+	function getProgressEl() {
+		if (!PROGRESS_RING_WRAP) {
+			PROGRESS_RING_WRAP = byId("progress-ring-wrap");
+			RING_FILL = document.querySelector(".progress-ring_fill");
+		}
+		return { wrap: PROGRESS_RING_WRAP, fill: RING_FILL };
+	}
+
+	function showProgressRing() {
+		var el = getProgressEl();
+		el.wrap.classList.remove("hidden");
+		progressStep = -1;
+		// reset ring
+		el.fill.style.strokeDashoffset = 326.73;
+		document.querySelectorAll(".progress-step").forEach(function (s) {
+			s.classList.remove("active", "done");
+		});
+	}
+
+	function hideProgressRing() {
+		var el = getProgressEl();
+		el.wrap.classList.add("hidden");
+		if (progressTimer) {
+			clearInterval(progressTimer);
+			progressTimer = null;
+		}
+		progressStep = -1;
+	}
+
+	function activateStep(step) {
+		// mark all lower steps done
+		document.querySelectorAll(".progress-step").forEach(function (s) {
+			var n = parseInt(s.dataset.step, 10);
+			s.classList.remove("active");
+			if (n < step) s.classList.add("done");
+			else if (n === step) s.classList.add("active");
+			else s.classList.remove("done");
+		});
+		// fill ring proportionally: step / 3 * circumference
+		var el = getProgressEl();
+		var offset = RING_CIRCUMFERENCE * (1 - (step + 1) / 3);
+		el.fill.style.strokeDashoffset = Math.max(0, offset);
+	}
+
+	function advanceStep() {
+		if (progressStep < 2) {
+			progressStep++;
+			activateStep(progressStep);
+		}
+	}
+
+	function startProgressTimer() {
+		showProgressRing();
+		// step 0 immediately, then every 15 s
+		advanceStep();
+		progressTimer = setInterval(advanceStep, 15000);
+	}
+
 	function setFormBusy(isBusy) {
 		var fields = ["email", "full_name", "company_slug", "password"];
 		fields.forEach(function (id) {
@@ -95,7 +159,8 @@
 		}
 
 		setFormBusy(true);
-		setNotice("Creating tenant. This may take up to a couple of minutes...", false);
+		startProgressTimer();
+		setNotice("Creating tenant. This usually takes 1–2 minutes.", false);
 		try {
 			var result = await callApi("saas_control.saas_control.api.create_or_login", {
 				email: email,
@@ -106,6 +171,7 @@
 
 			if (result.redirect_url) {
 				setNotice("Tenant ready. Redirecting to login...");
+				hideProgressRing();
 				window.location.href = result.redirect_url;
 				return;
 			}
@@ -115,6 +181,7 @@
 			setNotice("Tenant creation failed. Try a different company slug.", true);
 		} finally {
 			setFormBusy(false);
+			hideProgressRing();
 		}
 	}
 

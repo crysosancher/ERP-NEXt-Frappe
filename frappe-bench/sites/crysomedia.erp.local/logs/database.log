@@ -1878,3 +1878,185 @@ ALTER TABLE `tabContact` ADD COLUMN `is_billing_contact` int(1) not null default
 ALTER TABLE `tabCommunication` ADD COLUMN `company` varchar(140)
 2026-07-20 01:54:48,279 WARNING database DDL Query made to DB:
 ALTER TABLE `tabEmail Account` ADD COLUMN `company` varchar(140)
+2026-07-23 02:46:06,045 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-23 12:56:02,139 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-23 12:56:14,820 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-23 12:56:20,964 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-23 23:37:10,507 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-23 23:37:47,204 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-23 23:38:04,102 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-24 00:13:14,033 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-24 00:13:24,506 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-24 00:20:20,089 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-24 00:20:33,926 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-24 00:29:47,529 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+2026-07-24 00:30:01,882 WARNING database DDL Query made to DB:
+CREATE TABLE IF NOT EXISTS __saas_tenant_registry (
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
+            owner_email VARCHAR(255) NOT NULL,
+            company_slug VARCHAR(64) NOT NULL,
+            site_name VARCHAR(255) NOT NULL,
+            tenant_domain VARCHAR(255) NOT NULL,
+            status VARCHAR(32) NOT NULL,
+            log_text LONGTEXT,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY uq_owner_email (owner_email),
+            UNIQUE KEY uq_company_slug (company_slug)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

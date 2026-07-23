@@ -145,6 +145,84 @@ body {
 	color: var(--danger);
 }
 
+/* ─── Progress Ring ──────────────────────────────────────────────────────── */
+.progress-ring-wrap {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 6px 0 4px;
+}
+
+.progress-ring {
+	transform: rotate(-90deg);
+	flex-shrink: 0;
+}
+
+.progress-ring_track {
+	fill: none;
+	stroke: var(--bg-2);
+	stroke-width: 8;
+}
+
+.progress-ring_fill {
+	fill: none;
+	stroke: var(--brand);
+	stroke-width: 8;
+	stroke-linecap: round;
+	transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-steps {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.progress-step {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	opacity: 0.35;
+	transition: opacity 0.4s ease;
+}
+
+.progress-step.active {
+	opacity: 1;
+}
+
+.progress-step.done {
+	opacity: 0.7;
+}
+
+.step-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--border);
+	transition: background 0.3s ease;
+	flex-shrink: 0;
+}
+
+.progress-step.active .step-dot {
+	background: var(--brand);
+	box-shadow: 0 0 0 3px rgba(0, 89, 184, 0.15);
+}
+
+.progress-step.done .step-dot {
+	background: var(--brand-2);
+}
+
+.step-label {
+	font-size: 13px;
+	color: var(--text-2);
+	font-weight: 500;
+}
+
+.progress-step.active .step-label {
+	color: var(--text-1);
+	font-weight: 600;
+}
+
 .hidden {
 	display: none;
 }

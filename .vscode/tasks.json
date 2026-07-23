@@ -1483,6 +1483,24 @@
 				"-lc",
 				"curl -s -o /tmp/saas_final_health.html -w \"%{http_code}\\n\" http://127.0.0.1:8000/saas && curl -s -X POST --data-urlencode \"email=demo@example.com\" \"http://127.0.0.1:8000/api/method/saas_control.saas_control.api.resolve_tenant\""
 			]
+		},
+		{
+			"label": "kill-port-8000",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"PIDS=$(lsof -ti tcp:8000 -sTCP:LISTEN || true); if [ -n \"$PIDS\" ]; then echo \"Killing: $PIDS\"; kill -9 $PIDS; else echo \"No listener on 8000\"; fi; echo \"After:\"; lsof -nP -iTCP:8000 -sTCP:LISTEN || true"
+			]
+		},
+		{
+			"label": "confirm-port-8000-free",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"if lsof -nP -iTCP:8000 -sTCP:LISTEN >/tmp/p8000_check 2>&1; then echo \"LISTENING\"; cat /tmp/p8000_check; else echo \"FREE\"; fi"
+			]
 		}
 	]
 }

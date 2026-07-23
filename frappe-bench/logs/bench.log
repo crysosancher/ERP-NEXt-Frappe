@@ -119,3 +119,146 @@
 2026-07-20 02:28:05,916 INFO /Users/crysosancher/.local/bin/bench new-site qwerty.erp.local --db-host 127.0.0.1 --db-port 3307 --db-root-username root --db-root-password root --admin-password 12345678
 2026-07-20 02:28:21,263 INFO /Users/crysosancher/.local/bin/bench --site qwerty.erp.local install-app erpnext
 2026-07-20 02:28:57,249 INFO /Users/crysosancher/.local/bin/bench --site qwerty.erp.local set-config host_name https://qwerty.erp.local
+2026-07-23 02:43:51,075 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-23 02:43:51,436 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-23 02:43:51,702 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-23 02:43:51,954 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-23 02:43:52,219 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-23 02:43:52,473 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-23 02:43:52,740 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-23 02:43:53,000 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-23 02:43:53,254 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-23 02:43:53,511 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-23 02:43:53,770 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-23 02:43:54,028 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-23 02:43:54,285 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-23 02:43:54,541 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-23 02:43:54,999 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-23 02:45:18,101 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-23 02:45:18,491 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-23 02:45:18,745 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-23 02:45:19,006 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-23 02:45:19,261 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-23 02:45:19,515 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-23 02:45:19,770 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-23 02:45:20,024 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-23 02:45:20,281 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-23 02:45:20,541 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-23 02:45:20,806 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-23 02:45:21,062 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-23 02:45:21,318 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-23 02:45:21,573 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-23 02:45:22,003 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-23 12:50:52,421 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-23 12:50:52,862 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-23 12:50:53,133 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-23 12:50:53,432 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-23 12:50:53,735 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-23 12:50:54,016 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-23 12:50:54,316 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-23 12:50:54,605 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-23 12:50:54,885 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-23 12:50:55,165 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-23 12:50:55,464 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-23 12:50:55,745 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-23 12:50:56,033 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-23 12:50:56,344 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-23 12:54:22,808 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-23 12:54:23,158 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-23 12:54:23,415 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-23 12:54:23,669 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-23 12:54:23,949 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-23 12:54:24,210 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-23 12:54:24,467 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-23 12:54:24,724 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-23 12:54:24,979 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-23 12:54:25,234 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-23 12:54:25,488 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-23 12:54:25,739 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-23 12:54:26,002 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-23 12:54:26,258 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-23 12:54:26,693 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-23 12:56:21,145 INFO /Users/crysosancher/.local/bin/bench new-site test.erp.local --db-host 162.19.221.228 --db-port 3308 --db-root-username root --db-root-password admin --admin-password test@123
+2026-07-23 23:36:45,917 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-23 23:36:46,258 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-23 23:36:46,503 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-23 23:36:46,747 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-23 23:36:46,993 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-23 23:36:47,243 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-23 23:36:47,492 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-23 23:36:47,741 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-23 23:36:47,991 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-23 23:36:48,264 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-23 23:36:48,514 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-23 23:36:48,767 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-23 23:36:49,032 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-23 23:36:49,278 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-23 23:36:49,712 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-23 23:38:04,263 INFO /Users/crysosancher/.local/bin/bench new-site thoughtbins.erp.local --db-host 162.19.221.228 --db-port 3308 --db-root-username root --db-root-password admin --admin-password test@123
+2026-07-24 00:12:55,855 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-24 00:12:56,188 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-24 00:12:56,424 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-24 00:12:56,676 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-24 00:12:56,917 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-24 00:12:57,161 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-24 00:12:57,401 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-24 00:12:57,641 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-24 00:12:57,882 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-24 00:12:58,124 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-24 00:12:58,365 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-24 00:12:58,609 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-24 00:12:58,853 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-24 00:12:59,095 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-24 00:12:59,543 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-24 00:13:25,195 INFO /Users/crysosancher/.local/bin/bench new-site though.erp.local --db-host 162.19.221.228 --db-port 3308 --db-root-username root --db-root-password admin --admin-password test@123
+2026-07-24 00:20:01,036 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-24 00:20:01,476 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-24 00:20:01,744 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-24 00:20:02,019 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-24 00:20:02,293 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-24 00:20:02,566 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-24 00:20:02,890 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-24 00:20:03,169 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-24 00:20:03,445 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-24 00:20:03,736 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-24 00:20:04,013 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-24 00:20:04,271 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-24 00:20:04,537 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-24 00:20:04,791 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-24 00:20:05,259 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-24 00:20:34,161 INFO /Users/crysosancher/.local/bin/bench new-site test5.erp.local --db-host 162.19.221.228 --db-port 3308 --db-root-username root --db-root-password admin --admin-password test@123
+2026-07-24 00:23:03,649 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-24 00:23:03,965 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-24 00:23:04,209 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-24 00:23:04,451 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-24 00:23:04,714 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-24 00:23:04,964 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-24 00:23:05,210 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-24 00:23:05,458 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-24 00:23:05,713 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-24 00:23:05,958 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-24 00:23:06,206 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-24 00:23:06,454 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-24 00:23:06,698 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-24 00:23:06,948 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-24 00:23:07,377 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-24 00:24:24,129 INFO /Users/crysosancher/.local/bin/bench clear-cache
+2026-07-24 00:24:47,758 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_cache redis://127.0.0.1:13000
+2026-07-24 00:24:47,998 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_queue redis://127.0.0.1:11000
+2026-07-24 00:24:48,241 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g redis_socketio redis://127.0.0.1:12000
+2026-07-24 00:24:48,483 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g dns_multitenant true
+2026-07-24 00:24:48,732 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g serve_default_site false
+2026-07-24 00:24:48,980 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g default_site crysomedia.erp.local
+2026-07-24 00:24:49,225 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_host 162.19.221.228
+2026-07-24 00:24:49,470 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_port 3308
+2026-07-24 00:24:49,716 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_user root
+2026-07-24 00:24:49,972 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_root_password admin
+2026-07-24 00:24:50,217 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_db_container erp-mariadb
+2026-07-24 00:24:50,464 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_erp_app erpnext
+2026-07-24 00:24:50,709 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_base_domain erp.local
+2026-07-24 00:24:50,955 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench set-config -g saas_redirect_mode nip_io
+2026-07-24 00:24:51,374 INFO /Users/crysosancher/Documents/Cryso/Thoughtins/ERP-NEXT/frappe-bench/env/bin/bench serve --port 8000
+2026-07-24 00:27:47,327 INFO /Users/crysosancher/.local/bin/bench --site crysomedia.127.0.0.1.nip.io clear-cache
+2026-07-24 00:28:34,996 INFO /Users/crysosancher/.local/bin/bench build --app saas_control
+2026-07-24 00:28:41,396 INFO /Users/crysosancher/.local/bin/bench build --app saas_control
+2026-07-24 00:30:02,040 INFO /Users/crysosancher/.local/bin/bench new-site test7.erp.local --db-host 162.19.221.228 --db-port 3308 --db-root-username root --db-root-password admin --admin-password test@123

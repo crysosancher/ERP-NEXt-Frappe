@@ -1,7 +1,7 @@
 {% extends "templates/web.html" %}
 
 {% block page_content %}
-<link rel="stylesheet" href="/assets/saas_control/css/saas_portal.css">
+<link rel="stylesheet" href="/assets/saas_control/css/saas_portal.css?v=20260724">
 
 <div class="saas-shell">
   <section class="saas-card">
@@ -35,6 +35,29 @@
 
       <div id="saas-notice" class="notice hidden"></div>
 
+      <!-- Progress ring: hidden until provisioning starts -->
+      <div id="progress-ring-wrap" class="progress-ring-wrap hidden">
+        <svg class="progress-ring" viewBox="0 0 120 120" width="120" height="120">
+          <circle class="progress-ring_track" cx="60" cy="60" r="52" />
+          <circle class="progress-ring_fill" cx="60" cy="60" r="52"
+            stroke-dasharray="326.73" stroke-dashoffset="326.73" />
+        </svg>
+        <div class="progress-steps">
+          <div class="progress-step" data-step="0">
+            <span class="step-dot"></span>
+            <span class="step-label">Setting up database</span>
+          </div>
+          <div class="progress-step" data-step="1">
+            <span class="step-dot"></span>
+            <span class="step-label">Installing apps</span>
+          </div>
+          <div class="progress-step" data-step="2">
+            <span class="step-dot"></span>
+            <span class="step-label">Finalising</span>
+          </div>
+        </div>
+      </div>
+
       <div class="actions">
         <button id="continue-btn" class="btn btn-primary" type="button">Continue</button>
         <button id="create-btn" class="btn btn-secondary hidden" type="button">Create Tenant</button>
@@ -43,5 +66,5 @@
   </section>
 </div>
 
-<script src="/assets/saas_control/js/saas_portal.js"></script>
+<script src="/assets/saas_control/js/saas_portal.js?v=20260724"></script>
 {% endblock %}
